@@ -5,14 +5,34 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-input placeholder="Email" type="email" [(ngModel)]="email"></ion-input>
-  <ion-input placeholder="Contraseña" type="password" [(ngModel)]="password"></ion-input>
+  <ion-card class="login-card">
+    <ion-card-header>
+      <ion-card-title>Crear una cuenta</ion-card-title>
+      <ion-card-subtitle>Ingresa tus datos</ion-card-subtitle>
+    </ion-card-header>
 
-  <ion-item>
-    <ion-label>Fecha de Nacimiento</ion-label>
-    <ion-datetime display-format="YYYY-MM-DD" [(ngModel)]="birthdate"></ion-datetime>
-  </ion-item>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" [(ngModel)]="email"></ion-input>
+      </ion-item>
 
-  <ion-button expand="full" (click)="register()">Registrarse</ion-button>
-  <p>¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a></p>
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password" [(ngModel)]="password"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Fecha de nacimiento</ion-label>
+        <ion-input type="date" [(ngModel)]="birthdate"></ion-input>
+      </ion-item>
+
+      <ion-button expand="full" (click)="register()">Registrarse</ion-button>
+
+      <p class="text-center">
+        ¿Ya tienes una cuenta?
+        <ion-router-link routerLink="/login">Inicia sesión</ion-router-link>
+      </p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
