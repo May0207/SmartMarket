@@ -26,4 +26,7 @@ export class LoginPage {
       console.error('Error en login:', error);
     }
   }
+  goToRegister() {
+    this.router.navigate(['/register']);
+  }
 }

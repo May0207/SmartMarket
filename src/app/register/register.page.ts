@@ -40,4 +40,7 @@ export class RegisterPage {
 
     return age > 18 || (age === 18 && today >= new Date(birthDate.setFullYear(today.getFullYear())));
   }
+  goToLogin() {
+    this.router.navigate(['/login']);
+  }
 }
