@@ -1,0 +1,7 @@
+{
+  "name": "SmartMarket",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
