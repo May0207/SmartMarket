@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Iniciar Sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-input placeholder="Email" type="email" [(ngModel)]="email"></ion-input>
+  <ion-input placeholder="Contraseña" type="password" [(ngModel)]="password"></ion-input>
+
+  <ion-button expand="full" (click)="login()">Entrar</ion-button>
+  <p>No tienes cuenta? <a routerLink="/register">Regístrate</a></p>
+</ion-content>

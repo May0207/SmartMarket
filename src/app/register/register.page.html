@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-input placeholder="Email" type="email" [(ngModel)]="email"></ion-input>
+  <ion-input placeholder="Contraseña" type="password" [(ngModel)]="password"></ion-input>
+
+  <ion-item>
+    <ion-label>Fecha de Nacimiento</ion-label>
+    <ion-datetime display-format="YYYY-MM-DD" [(ngModel)]="birthdate"></ion-datetime>
+  </ion-item>
+
+  <ion-button expand="full" (click)="register()">Registrarse</ion-button>
+  <p>¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a></p>
+</ion-content>
