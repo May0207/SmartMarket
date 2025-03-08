@@ -1,0 +1,361 @@
+/* Fuente Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+/* Cambiar el color de fondo de la página */
+ion-content {
+  --background: #f2f2f2; /* Nuevo color de fondo */
+  --overflow: hidden; /* Oculta la barra de desplazamiento */
+}
+
+/* Contenedor general */
+.main-container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Barra lateral (fija) */
+.sidebar {
+  width: 60px;
+  background: #FFFFFF; /* Blanco */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Alinea los elementos al inicio */
+  padding-top: 20px; /* Espacio superior */
+  height: 100vh;
+  position: fixed; /* Fija la barra lateral */
+  left: 0;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Contenedor superior del sidebar */
+.sidebar-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px; /* Espacio entre los íconos */
+}
+
+/* Contenedor inferior del sidebar */
+.sidebar-bottom {
+  margin-top: auto; /* Empuja el contenido hacia abajo */
+  margin-bottom: 20px; /* Margen inferior */
+}
+
+/* Estilos para los íconos del sidebar */
+.sidebar-icon {
+  cursor: pointer; /* Cambia el cursor al pasar sobre el ícono */
+  transition: opacity 0.2s ease; /* Efecto de transición al hacer hover */
+  color: #333; /* Color de los íconos */
+}
+
+.sidebar-icon:hover {
+  opacity: 0.8; /* Efecto de hover */
+}
+
+/* Logo */
+.sidebar-icon.logo {
+  color: #65646A;
+  font-size: 30px; /* Tamaño personalizado */
+  width: 30px; /* Tamaño personalizado */
+  height: 30px; /* Tamaño personalizado */
+}
+
+/* Favoritos, Perfil y Configuración */
+.sidebar-icon.favoritos {
+  margin-top: 50px; /* Mueve los íconos 50px hacia abajo */
+  color: #6F4FF2;
+  font-size: 22px; /* Tamaño personalizado */
+  width: 22px; /* Tamaño personalizado */
+  height: 22px; /* Tamaño personalizado */
+}
+
+.sidebar-icon.profile,
+.sidebar-icon.settings {
+  margin-top: 15px; /* Mueve los íconos 50px hacia abajo */
+  color: #65646A;
+  font-size: 22px; /* Tamaño personalizado */
+  width: 22px; /* Tamaño personalizado */
+  height: 22px; /* Tamaño personalizado */
+}
+
+/* Cerrar Sesión */
+.sidebar-icon.sign-out {
+  color: #65646A;
+  font-size: 22px; /* Tamaño personalizado */
+  width: 22px; /* Tamaño personalizado */
+  height: 22px; /* Tamaño personalizado */
+}
+
+/* Encabezado personalizado */
+.custom-header {
+  position: fixed; /* Fija el encabezado */
+  top: 0;
+  left: 110px; /* 60px (sidebar) + 50px (distancia) */
+  right: 0;
+  background: #f2f2f2; /* Fondo gris claro */
+  z-index: 999;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Buscador personalizado */
+.custom-searchbar {
+  --border-radius: 12px; /* Bordes redondeados */
+  --box-shadow: none; /* Sin sombra */
+  --background: #ffffff; /* Fondo blanco */
+  --color: #333; /* Color del texto */
+  --placeholder-color: #999; /* Color del placeholder */
+  --icon-color: #333; /* Color del ícono */
+  height: 50px; /* Alto personalizado */
+  width: 380px; /* Ancho personalizado */
+}
+
+.custom-searchbar::part(container) {
+  border-radius: 12px; /* Bordes redondeados */
+  box-shadow: none; /* Sin sombra */
+}
+
+/* Avatar del usuario */
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  margin-left: auto; /* Alinea a la derecha */
+}
+
+/* Contenedor del título "Productos" */
+.page-title-container {
+  position: fixed; /* Fija el título */
+  top: 60px; /* Debajo del buscador */
+  left: 120px; /* 60px (sidebar) + 50px (distancia) */
+  right: 0;
+  background: #f2f2f2; /* Fondo gris claro */
+  z-index: 999;
+  padding: 10px 20px;
+}
+
+/* Título "Productos" */
+.page-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 600; /* Semibold */
+  color: #333; /* Color del texto */
+  margin: 0;
+}
+
+/* Área de contenido */
+.content-area {
+  flex: 1;
+  padding: 20px;
+  margin-left: 120px; /* 60px (sidebar) + 50px (distancia) */
+  margin-top: 100px; /* Reducido para mover los filtros más arriba */
+}
+
+/* Filtros */
+.filter-container {
+  position: relative; /* Necesario para posicionar el contenido del filtro */
+  display: flex;
+  gap: 10px;
+  margin-bottom: 0; /* Elimina el margen inferior */
+  margin-top: 0; /* Ajuste para subir los botones */
+  padding-left: 0; /* Elimina el padding izquierdo */
+}
+.filter-button-container {
+  position: relative; /* Necesario para posicionar el contenido del filtro */
+}
+
+/* Estilos para los botones de filtros */
+.filter-container ion-button {
+  --border-radius: 22px; /* Bordes redondeados */
+  --background: #00BD90; /* Color de fondo */
+  --padding-start: 20px; /* Espaciado interno */
+  --padding-end: 20px; /* Espaciado interno */
+  --box-shadow: none; /* Sin sombra */
+  font-family: 'Poppins', sans-serif; /* Fuente Poppins */
+  font-size: 14px; /* Tamaño del texto */
+  font-weight: 500; /* Peso de la fuente */
+  text-transform: none; /* Sin mayúsculas */
+  color: white; /* Color del texto */
+}
+.filter-container ion-button::part(native) {
+  border-radius: 22px; /* Bordes redondeados */
+}
+/* Estilos para el contenido del filtro de supermercados */
+.dropdown-overlay {
+  position: absolute;
+  background: rgba(255, 255, 255, 1); /* Fondo semi-transparente */
+  width: calc(100% + 20px); /* Mismo ancho que el botón + 20px */
+  padding: 15px;
+  top: 100%; /* Posiciona el contenido justo debajo del botón */
+  left: 0;
+  border-radius: 8px;
+  z-index: 10; /* Asegura que esté por encima de otros elementos */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  margin-top: 5px; /* Espacio entre el botón y el contenido */
+}
+
+/* Estilos para los ítems del filtro */
+.dropdown ion-item {
+  --padding-start: 0; /* Elimina el padding izquierdo */
+  --inner-padding-end: 0; /* Elimina el padding derecho */
+}
+
+/* Estilos para las casillas de verificación */
+.supermarket-checkbox {
+  --background-checked: #00BD90; /* Fondo verde cuando está seleccionado */
+  --border-color-checked: #00BD90; /* Borde verde cuando está seleccionado */
+  --checkmark-color: white; /* Color del tick */
+  --size: 20px; /* Tamaño de la casilla */
+}
+
+/* Estilos para los textos de los supermercados */
+.supermarket-label {
+  font-family: 'Poppins', sans-serif; /* Fuente Poppins */
+  font-size: 14px; /* Tamaño del texto */
+  color: #848484; /* Color del texto */
+  margin-left: 10px; /* Espacio entre la casilla y el texto */
+}
+
+/* Estilos para el botón "Aplicar" */
+.apply-button {
+  --border-radius: 22px; /* Bordes redondeados */
+  font-family: 'Poppins', sans-serif; /* Fuente Poppins */
+  font-size: 14px; /* Tamaño del texto */
+  font-weight: 500; /* Peso de la fuente */
+  text-transform: none; /* Sin mayúsculas */
+  margin-top: 10px; /* Espacio entre los ítems y el botón */
+  width: auto; /* Ancho automático */
+  margin-left: auto; /* Alinea el botón a la derecha */
+  display: flex; /* Para alinear el texto a la derecha */
+  justify-content: flex-end; /* Alinea el texto a la derecha */
+}
+
+/* Lista de productos (con desplazamiento pero sin barra visible) */
+.product-grid {
+  overflow-y: scroll; /* Permite el desplazamiento */
+  max-height: calc(100vh - 200px); /* Ajusta la altura según sea necesario */
+  margin-top: 0; /* Elimina el margen superior para alinear con los filtros */
+  padding-right: 20px; /* Evita que el contenido se superponga con la barra lateral */
+  padding-left: 0; /* Elimina el padding izquierdo */
+  scrollbar-width: none; /* Oculta la barra de desplazamiento en Firefox */
+}
+
+/* Personalización de la barra de desplazamiento para navegadores WebKit */
+.product-grid::-webkit-scrollbar {
+  width: 8px; /* Ancho de la barra de desplazamiento */
+}
+
+.product-grid::-webkit-scrollbar-track {
+  background: transparent; /* Fondo transparente */
+}
+
+.product-grid::-webkit-scrollbar-thumb {
+  background: #6F4FF2; /* Color del thumb (barra) */
+  border-radius: 4px; /* Bordes redondeados */
+}
+
+.product-grid::-webkit-scrollbar-thumb:hover {
+  background: #5a3dc2; /* Color del thumb al hacer hover */
+}
+
+/* Estilos para el contenedor del producto */
+.product-card {
+  width: 282px;
+  height: 433px;
+  background: white;
+  border-radius: 19px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  margin: 10px;
+  box-shadow: none; /* Sin sombra */
+}
+
+/* Estilos para el nombre del producto */
+.product-card h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: 600; /* Semibold */
+  margin: 10px 0;
+}
+
+/* Estilos para el resto del texto */
+.product-card p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+/* Estilos para el botón de "Añadir a favoritos" */
+.favorite-button::part(native) {
+  background-color: #6F4FF2;
+  border-radius: 9px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: white;
+  margin-top: 15px;
+  width: 100%;
+  box-shadow: none; /* Sin sombra */
+}
+/* Estilos específicos para el dropdown del filtro de precio */
+.dropdown-overlay.price-dropdown {
+  width: 300px; /* Ancho personalizado */
+  padding: 20px; /* Espaciado interno */
+}
+
+/* Estilos para el texto dentro del filtro de precio */
+.dropdown-overlay.price-dropdown ion-label {
+  font-family: 'Poppins', sans-serif; /* Fuente Poppins */
+  font-size: 16px; /* Tamaño del texto más grande */
+  color: #848484; /* Color del texto */
+  margin-top: 10px; /* Espacio entre la barra y el texto */
+}
+
+/* Estilos para la barra de rango (ion-range) dentro del filtro de precio */
+.dropdown-overlay.price-dropdown ion-range {
+  --bar-background: #00BD90; /* Color de fondo de la barra */
+  --bar-background-active: #00BD90; /* Color de fondo activo de la barra */
+  --knob-background: #00BD90; /* Color del knob (circulo) */
+  --knob-size: 20px; /* Tamaño del knob */
+  --bar-height: 6px; /* Altura de la barra */
+  --bar-border-radius: 3px; /* Bordes redondeados de la barra */
+}
+/* Estilos específicos para el dropdown del filtro de información nutricional */
+.dropdown-overlay.nutrition-dropdown {
+  width: 200px; /* Ancho personalizado */
+  padding: 10px; /* Espaciado interno */
+}
+
+/* Estilos para los botones dentro del filtro de información nutricional */
+/* Estilos específicos para los botones dentro del dropdown de información nutricional */
+.nutrition-dropdown ion-button.nutrition-button::part(native) {
+  background-color: white; /* Fondo blanco */
+  color: #848484; /* Texto gris */
+  font-family: 'Poppins', sans-serif; /* Fuente Poppins */
+  font-size: 14px; /* Tamaño del texto */
+  font-weight: 500; /* Peso de la fuente */
+  text-transform: none; /* Sin mayúsculas */
+  margin: 5px 0; /* Espacio entre botones */
+  width: 100%; /* Ancho completo */
+  box-shadow: none; /* Sin sombra */
+  border-radius: 12px; /* Bordes redondeados */
+  padding: 10px 16px; /* Espaciado interno */
+  transition: background-color 0.2s ease; /* Transición suave */
+}
+
+/* Efecto hover para los botones */
+.nutrition-dropdown ion-button.nutrition-button::part(native):hover {
+  background-color: #f2f2f2; /* Fondo gris claro al hacer hover */
+}
+/* Estilos para el texto del precio por unidad */
+.product-card p.precio-por-unidad {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: #666; /* Color gris para diferenciarlo */
+  margin: 5px 0; /* Espaciado */
+}

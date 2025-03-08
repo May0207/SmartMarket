@@ -8,7 +8,11 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', loadComponent: () => import('./home/home.page').then(m => m.HomePage) },
   { path: 'login', loadComponent: () => import('./login/login.page').then(m => m.LoginPage) },
-  { path: 'register', loadComponent: () => import('./register/register.page').then(m => m.RegisterPage) }
+  { path: 'register', loadComponent: () => import('./register/register.page').then(m => m.RegisterPage) },  {
+    path: 'buscar-producto',
+    loadChildren: () => import('./buscar-producto/buscar-producto.module').then( m => m.BuscarProductoPageModule)
+  }
+
 ];
 
 @NgModule({

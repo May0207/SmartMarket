@@ -1,0 +1,156 @@
+<ion-content>
+  <!-- Contenedor General -->
+  <div class="main-container">
+    <!-- Barra Lateral -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <!-- Logo -->
+        <img src="assets/lLogo.png" alt="Logo" class="sidebar-icon logo" (click)="goToHome()">
+        <!-- Favoritos -->
+        <ion-icon name="star" class="sidebar-icon favoritos" (click)="goToFavorites()"></ion-icon>
+        <!-- Perfil -->
+        <ion-icon name="person" class="sidebar-icon profile" (click)="goToProfile()"></ion-icon>
+        <!-- Configuración -->
+        <ion-icon name="settings" class="sidebar-icon settings" (click)="goToSettings()"></ion-icon>
+      </div>
+
+      <!-- Cerrar Sesión -->
+      <div class="sidebar-bottom">
+        <ion-icon name="log-out" class="sidebar-icon sign-out" (click)="logout()"></ion-icon>
+      </div>
+    </aside>
+
+    <!-- Contenedor personalizado para el encabezado -->
+    <div class="custom-header">
+      <!-- Buscador -->
+      <ion-searchbar class="custom-searchbar" placeholder="Buscar"></ion-searchbar>
+      <!-- Avatar del usuario -->
+      <ion-avatar class="user-avatar">
+        <img src="assets/user-avatar.jpg" alt="Usuario">
+      </ion-avatar>
+    </div>
+
+    <!-- Título "Productos" -->
+    <div class="page-title-container">
+      <h1 class="page-title">Productos</h1>
+    </div>
+
+    <!-- Contenido Principal -->
+    <div class="content-area">
+      <!-- Filtros -->
+      <div class="filter-container">
+        <!-- Botón de Supermercados -->
+        <div class="filter-button-container">
+          <ion-button class="filter-button" expand="full" (click)="toggleDropdown('supermarkets')">
+            Supermercados
+            <ion-icon [name]="showSupermarkets ? 'chevron-down-outline' : 'chevron-up-outline'" slot="end"></ion-icon>
+          </ion-button>
+          <!-- Contenido del filtro de supermercados -->
+          <div class="dropdown-overlay" *ngIf="showSupermarkets">
+            <ion-list class="dropdown">
+              <ion-item>
+                <ion-checkbox [(ngModel)]="filters.dia" class="supermarket-checkbox"></ion-checkbox>
+                <ion-label class="supermarket-label">Dia</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-checkbox [(ngModel)]="filters.carrefour" class="supermarket-checkbox"></ion-checkbox>
+                <ion-label class="supermarket-label">Carrefour</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-checkbox [(ngModel)]="filters.hipercor" class="supermarket-checkbox"></ion-checkbox>
+                <ion-label class="supermarket-label">Hipercor</ion-label>
+              </ion-item>
+              <ion-button class="apply-button" expand="full" (click)="applyFilters()">Aplicar</ion-button>
+            </ion-list>
+          </div>
+        </div>
+
+        <!-- Botón de Precio -->
+        <div class="filter-button-container">
+          <ion-button class="filter-button" expand="full" (click)="toggleDropdown('price')">
+            Precio
+            <ion-icon [name]="showPrice ? 'chevron-down-outline' : 'chevron-up-outline'" slot="end"></ion-icon>
+          </ion-button>
+          <!-- Contenido del filtro de precio -->
+          <div class="dropdown-overlay price-dropdown" *ngIf="showPrice">
+            <ion-list class="dropdown">
+              <ion-item>
+                <ion-range min="0" max="500" [(ngModel)]="priceRange"></ion-range>
+              </ion-item>
+              <ion-label>{{ priceRange }}€</ion-label>
+              <ion-button class="apply-button" expand="full" (click)="applyFilters()">Aplicar</ion-button>
+            </ion-list>
+          </div>
+        </div>
+
+        <!-- Botón de Info Nutricional -->
+        <div class="filter-button-container">
+          <ion-button class="filter-button" expand="full" (click)="toggleDropdown('nutrition')">
+            información Nutricional
+            <ion-icon [name]="showNutrition ? 'chevron-down-outline' : 'chevron-up-outline'" slot="end"></ion-icon>
+          </ion-button>
+          <!-- Contenido del filtro de información nutricional -->
+          <div class="dropdown-overlay nutrition-dropdown" *ngIf="showNutrition">
+            <ion-list class="dropdown">
+              <!-- Calorías -->
+              <ion-item>
+                <ion-button class="nutrition-button" expand="full" (click)="applyNutritionFilter('lessCalories')">Menos calorías</ion-button>
+              </ion-item>
+              <ion-item>
+                <ion-button class="nutrition-button" expand="full" (click)="applyNutritionFilter('moreCalories')">Más calorías</ion-button>
+              </ion-item>
+              <!-- Proteínas -->
+              <ion-item>
+                <ion-button class="nutrition-button" expand="full" (click)="applyNutritionFilter('lessProtein')">Menos proteínas</ion-button>
+              </ion-item>
+              <ion-item>
+                <ion-button class="nutrition-button" expand="full" (click)="applyNutritionFilter('moreProtein')">Más proteínas</ion-button>
+              </ion-item>
+              <!-- Hidratos -->
+              <ion-item>
+                <ion-button class="nutrition-button" expand="full" (click)="applyNutritionFilter('lessCarbs')">Menos hidratos</ion-button>
+              </ion-item>
+              <ion-item>
+                <ion-button class="nutrition-button" expand="full" (click)="applyNutritionFilter('moreCarbs')">Más hidratos</ion-button>
+              </ion-item>
+              <!-- Grasas -->
+              <ion-item>
+                <ion-button class="nutrition-button" expand="full" (click)="applyNutritionFilter('lessFat')">Menos grasas</ion-button>
+              </ion-item>
+              <ion-item>
+                <ion-button class="nutrition-button" expand="full" (click)="applyNutritionFilter('moreFat')">Más grasas</ion-button>
+              </ion-item>
+              <!-- Azúcares -->
+              <ion-item>
+                <ion-button class="nutrition-button" expand="full" (click)="applyNutritionFilter('lessSugar')">Menos azúcares</ion-button>
+              </ion-item>
+              <ion-item>
+                <ion-button class="nutrition-button" expand="full" (click)="applyNutritionFilter('moreSugar')">Más azúcares</ion-button>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lista de productos (desplazable) -->
+      <ion-grid class="product-grid">
+        <ion-row>
+          <ion-col size="6" size-md="3" *ngFor="let product of products">
+            <ion-card class="product-card">
+              <img src="assets/product.jpg" />
+              <ion-card-content>
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.store }}</p>
+                <p>Precio: {{ product.price }}€</p>
+                <p class="precio-por-unidad">Precio por unidad: {{ product.precioPorUnidad }}</p>
+                <ion-button class="favorite-button" expand="full" (click)="addToFavorites(product)">
+                  Añadir a favoritos
+                </ion-button>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+</ion-content>
