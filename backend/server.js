@@ -27,7 +27,7 @@ db.connect(err => {
 
 // Registro de usuario con validación de edad
 app.post('/register', async (req, res) => {
-  const { email, password, birthdate } = req.body;
+  const { nombre, apellido1, apellido2, email, password, birthdate } = req.body;
 
   // Verificar si el usuario es mayor de 18 años
   const birthDate = new Date(birthdate);
@@ -40,8 +40,9 @@ app.post('/register', async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     db.query(
-      'INSERT INTO usuarios (email, password, birthdate, role) VALUES (?, ?, ?, "cliente")',
-      [email, hashedPassword, birthdate],
+      `INSERT INTO usuarios (nombre, apellido1, apellido2, email, password, birthdate, role)
+       VALUES (?, ?, ?, ?, ?, ?, "cliente")`,
+      [nombre, apellido1, apellido2, email, hashedPassword, birthdate],
       (err, result) => {
         if (err) return res.status(500).json({ error: err });
         res.json({ message: 'Usuario registrado exitosamente' });

@@ -9,10 +9,13 @@ import { Router } from '@angular/router';
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
-  standalone: true, // 👈 Hace que sea standalone
-  imports: [CommonModule, IonicModule, FormsModule] // 👈 Importa los módulos necesarios
+  standalone: true,
+  imports: [CommonModule, IonicModule, FormsModule]
 })
 export class RegisterPage {
+  nombre: string = '';
+  apellido1: string = '';
+  apellido2: string = '';
   email: string = '';
   password: string = '';
   birthdate: string = '';
@@ -26,7 +29,14 @@ export class RegisterPage {
     }
 
     try {
-      await this.authService.register(this.email, this.password, this.birthdate);
+      await this.authService.register(
+        this.nombre,
+        this.apellido1,
+        this.apellido2,
+        this.email,
+        this.password,
+        this.birthdate
+      );
       this.router.navigate(['/home']);
     } catch (error) {
       console.error('Error en registro:', error);
@@ -40,6 +50,7 @@ export class RegisterPage {
 
     return age > 18 || (age === 18 && today >= new Date(birthDate.setFullYear(today.getFullYear())));
   }
+
   goToLogin() {
     this.router.navigate(['/login']);
   }

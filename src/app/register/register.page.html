@@ -13,6 +13,21 @@
 
     <ion-card-content>
       <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input type="text" [(ngModel)]="nombre"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Apellido 1</ion-label>
+        <ion-input type="text" [(ngModel)]="apellido1"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Apellido 2</ion-label>
+        <ion-input type="text" [(ngModel)]="apellido2"></ion-input>
+      </ion-item>
+
+      <ion-item>
         <ion-label position="floating">Email</ion-label>
         <ion-input type="email" [(ngModel)]="email"></ion-input>
       </ion-item>
@@ -33,7 +48,6 @@
         ¿Ya tienes una cuenta?
         <a (click)="goToLogin()" class="link">Inicia sesión</a>
       </p>
-
 
     </ion-card-content>
   </ion-card>
