@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-buscar-producto',
@@ -11,6 +12,8 @@ import { IonicModule } from '@ionic/angular';
   imports: [CommonModule, FormsModule, IonicModule],
 })
 export class BuscarProductoPage {
+
+  constructor(private router: Router) {}
   // Variables para controlar los dropdowns
   showSupermarkets = false;
   showPrice = false;
@@ -147,5 +150,9 @@ export class BuscarProductoPage {
 
   logout() {
     console.log("Cerrar Sesión");
+  }
+
+  irAFavoritos() {
+    this.router.navigate(['/favoritos']);
   }
 }
