@@ -23,12 +23,23 @@
       <ion-icon name="close" class="close-button" (click)="cerrarPagina()"></ion-icon>
 
       <!-- Sección Izquierda: Imagen del Producto y Tienda -->
-      <div class="left-section">
-        <h2 class="product-name">{{ producto.nombre }}</h2>
-        <img [src]="producto.imagen" alt="Imagen del producto" class="product-image" />
-        <img [src]="producto.supermercadoLogo" alt="Logo supermercado" class="store-logo" />
-        <ion-button class="buy-button" expand="full">Comprar este producto</ion-button>
-      </div>
+      <!-- Sección Izquierda: Imagen del Producto y Tienda -->
+        <div class="left-section">
+          <h2 class="product-name">{{ producto.nombre }}</h2>
+          <img [src]="producto.imagen" alt="Imagen del producto" class="product-image" />
+
+          <div class="store-info">
+            <img [src]="producto.supermercadoLogo" alt="Logo supermercado" class="store-logo" />
+            <div class="product-details">
+              <h3>{{ producto.supermercado }}</h3>
+              <p><strong>Precio:</strong> {{ producto.precio }}€</p>
+              <p><strong>Precio por unidad:</strong> {{ producto.precioUnidad }}/ Unidad</p>
+            </div>
+          </div>
+
+          <ion-button class="buy-button" expand="full">Comprar este producto</ion-button>
+        </div>
+
 
       <!-- Sección Derecha: Gráficas -->
       <div class="right-section">

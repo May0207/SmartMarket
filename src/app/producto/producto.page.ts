@@ -22,9 +22,13 @@ export class ProductoPage implements AfterViewInit {
   product: any;
 
   producto = {
-    nombre: 'Nombre producto',
+    nombre: 'Platano de Canarias',
     imagen: 'assets/platanos.jpg',
-    supermercadoLogo: 'assets/carrefour.png'
+    supermercadoLogo: 'assets/carrefour.png',
+    supermercado: 'Carrefour',
+    precio: '2.00',
+    precioUnidad: '4.00'
+    
   };
 
   constructor(private route: ActivatedRoute, private router: Router ) {}

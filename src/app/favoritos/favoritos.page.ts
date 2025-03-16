@@ -28,7 +28,7 @@ export class FavoritosPage {
       supermercado: 'Carrefour',
       precio: '2.50',
       precioUnidad: '0.31',
-      imagen: 'assets/platanos-800g.jpg'
+      imagen: 'assets/platanos.jpg'
     },
     {
       nombre: 'Leche Entera 1L',
@@ -49,7 +49,7 @@ export class FavoritosPage {
       supermercado: 'Carrefour',
       precio: '2.50',
       precioUnidad: '0.31',
-      imagen: 'assets/platanos-800g.jpg'
+      imagen: 'assets/platanos.jpg'
     },
     {
       nombre: 'Leche Entera 1L',

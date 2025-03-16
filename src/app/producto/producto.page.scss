@@ -1,8 +1,10 @@
+/* Estilos generales */
 .main-container {
-    display: flex;
-    height: 100vh;
-  }
-  
+  display: flex;
+  height: 100%;
+  background-color: #ffffff;
+  padding: 0px;
+}
  /* Barra lateral (fija) */
 .sidebar {
   width: 60px;
@@ -77,61 +79,140 @@
   width: 22px; /* Tamaño personalizado */
   height: 22px; /* Tamaño personalizado */
 }
-  
-  .content-area {
-    flex: 1;
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    position: relative;
+
+
+/* Contenido Principal */
+.content-area {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  gap: 20px;
+}
+
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  &:hover {
+    color: red;
   }
-  
-  .close-button {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 32px;
-    cursor: pointer;
+}
+
+.left-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* Espaciado entre elementos */
+}
+
+.product-name {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.left-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* Espaciado entre elementos */
+  margin-left: 20vw; /* Mayor separación hacia la derecha */
+}
+
+.product-image {
+  width: 250px;  // Ajusta el ancho según lo necesites
+  height: auto;  // Mantiene la proporción original
+  object-fit: contain;  // Evita distorsiones
+  border-radius: 10px;  // Bordes redondeados opcionales
+  margin: 10px 0;  // Espaciado para que no se vea pegada
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);  // Efecto de aumento al pasar el cursor
   }
+}
+
+.store-logo {
+  width: 90px;
+  height: auto;
+  margin-top: 31px;
+  margin-bottom: 67px;
+}
+
+.store-info {
+  display: flex;
+  align-items: center;
+  gap: 10px; // Espacio entre el logo y la info
+}
+
+.product-details {
+  font-size: 14px;
+  color: #333;
+  width: 20vw;
+}
+
+.buy-button {
+  width: 100%;
+  background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%); // Degradado sutil
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 0;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
   
-  .left-section {
-    width: 40%;
-    text-align: center;
+  /* Eliminamos los estilos adicionales de fondo en Ionic */
+  --background: transparent;
+  --box-shadow: none;
+  --border-radius: 12px;
+  
+  &:hover {
+    background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
   }
-  
-  .product-image {
-    width: 80%;
-    max-width: 300px;
-    border-radius: 15px;
+
+  &:active {
+    background: #1d4ed8;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(0.98);
   }
-  
-  .store-logo {
-    width: 150px;
-    margin: 20px 0;
-  }
-  
-  .buy-button {
-    background: #2ecc71;
-    color: white;
-    border-radius: 20px;
-  }
-  
-  .right-section {
-    width: 55%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  .chart-container {
-    background: #f5f5f5;
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 20px;
-    text-align: center;
-    align-content: center;
-    max-width: 400px;
-    max-height: 450px;
-  }
-  
-  
+}
+
+
+/* Sección Derecha */
+.right-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+  gap: 20px;
+}
+
+.chart-container {
+  background: #fff;
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 27vw;
+  text-align: center;
+}
+
+.small-chart {
+  width: 24vw;
+}
+
+h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
