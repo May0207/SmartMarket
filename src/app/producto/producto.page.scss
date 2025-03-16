@@ -1,0 +1,137 @@
+.main-container {
+    display: flex;
+    height: 100vh;
+  }
+  
+ /* Barra lateral (fija) */
+.sidebar {
+  width: 60px;
+  background: #FFFFFF; /* Blanco */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Alinea los elementos al inicio */
+  padding-top: 20px; /* Espacio superior */
+  height: 100vh;
+  position: fixed; /* Fija la barra lateral */
+  left: 0;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Contenedor superior del sidebar */
+.sidebar-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px; /* Espacio entre los íconos */
+}
+
+/* Contenedor inferior del sidebar */
+.sidebar-bottom {
+  margin-top: auto; /* Empuja el contenido hacia abajo */
+  margin-bottom: 20px; /* Margen inferior */
+}
+
+/* Estilos para los íconos del sidebar */
+.sidebar-icon {
+  cursor: pointer; /* Cambia el cursor al pasar sobre el ícono */
+  transition: opacity 0.2s ease; /* Efecto de transición al hacer hover */
+  color: #333; /* Color de los íconos */
+}
+
+.sidebar-icon:hover {
+  opacity: 0.8; /* Efecto de hover */
+}
+
+/* Logo */
+.sidebar-icon.logo {
+  color: #65646A;
+  font-size: 30px; /* Tamaño personalizado */
+  width: 30px; /* Tamaño personalizado */
+  height: 30px; /* Tamaño personalizado */
+}
+
+/* Favoritos, Perfil y Configuración */
+.sidebar-icon.favoritos {
+  margin-top: 50px; /* Mueve los íconos 50px hacia abajo */
+  color: #65646A;
+  font-size: 22px; /* Tamaño personalizado */
+  width: 22px; /* Tamaño personalizado */
+  height: 22px; /* Tamaño personalizado */
+}
+
+.sidebar-icon.profile,
+.sidebar-icon.settings {
+  margin-top: 15px; /* Mueve los íconos 50px hacia abajo */
+  color: #65646A;
+  font-size: 22px; /* Tamaño personalizado */
+  width: 22px; /* Tamaño personalizado */
+  height: 22px; /* Tamaño personalizado */
+}
+
+/* Cerrar Sesión */
+.sidebar-icon.sign-out {
+  color: #65646A;
+  font-size: 22px; /* Tamaño personalizado */
+  width: 22px; /* Tamaño personalizado */
+  height: 22px; /* Tamaño personalizado */
+}
+  
+  .content-area {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    position: relative;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 32px;
+    cursor: pointer;
+  }
+  
+  .left-section {
+    width: 40%;
+    text-align: center;
+  }
+  
+  .product-image {
+    width: 80%;
+    max-width: 300px;
+    border-radius: 15px;
+  }
+  
+  .store-logo {
+    width: 150px;
+    margin: 20px 0;
+  }
+  
+  .buy-button {
+    background: #2ecc71;
+    color: white;
+    border-radius: 20px;
+  }
+  
+  .right-section {
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .chart-container {
+    background: #f5f5f5;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    align-content: center;
+    max-width: 400px;
+    max-height: 450px;
+  }
+  
+  

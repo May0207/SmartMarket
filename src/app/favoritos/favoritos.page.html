@@ -1,22 +1,56 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Favoritos</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <!-- Contenedor General -->
+  <div class="main-container">
+    
+    <!-- Barra Lateral -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <img src="assets/lLogo.png" alt="Logo" class="sidebar-icon logo" (click)="goToHome()">
+        <ion-icon name="star" class="sidebar-icon favoritos" (click)="irAFavoritos()"></ion-icon>
+        <ion-icon name="person" class="sidebar-icon profile" (click)="goToProfile()"></ion-icon>
+        <ion-icon name="settings" class="sidebar-icon settings" (click)="goToSettings()"></ion-icon>
+      </div>
+      <div class="sidebar-bottom">
+        <ion-icon name="log-out" class="sidebar-icon sign-out" (click)="logout()"></ion-icon>
+      </div>
+    </aside>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Favoritos</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <!-- Contenedor personalizado para el encabezado -->
+    <div class="custom-header">
+      <!-- Buscador -->
+      <ion-searchbar class="custom-searchbar" placeholder="Buscar"></ion-searchbar>
+      <!-- Avatar del usuario -->
+      <ion-avatar class="user-avatar">
+        <img src="assets/user-avatar.jpg" alt="Usuario">
+      </ion-avatar>
+    </div>
 
-  <ion-list>
-    <ion-item>
-      <ion-label>Ejemplo 1</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>Ejemplo 2</ion-label>
-    </ion-item>
-  </ion-list>
+
+    <!-- Contenido Principal -->
+    <div class="content-area">
+      <h1 class="page-title">Tus Productos Favoritos</h1>
+
+      <!-- Lista de productos favoritos -->
+      <ion-grid class="product-grid">
+        <ion-row>
+          <ion-col size="6" size-md="3" *ngFor="let producto of productosFavoritos">
+            <ion-card class="product-card">
+              <img [src]="producto.imagen" alt="Imagen del producto"/>
+              <ion-card-content>
+                <div class="product-info">
+                  <h3>{{ producto.nombre }}</h3>
+                  <p>{{ producto.supermercado }}</p>
+                  <p>Precio: {{ producto.precio }}€</p>
+                  <p class="precio-por-unidad">Precio por unidad: {{ producto.precioUnidad }} €/unidad</p>
+                </div>
+                <ion-button fill="clear" color="danger" (click)="toggleFavorito(producto)">
+                  <ion-icon name="heart"></ion-icon> Eliminar
+                </ion-button>
+              </ion-card-content>
+            </ion-card>            
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
 </ion-content>

@@ -32,36 +32,42 @@ export class BuscarProductoPage {
   // Lista de productos (ejemplo)
   products = [
     { 
+      id: 1,
       name: 'Nombre del producto 1', 
       store: 'Supermercado', 
       price: 20, 
       precioPorUnidad: '2.50€/kg' 
     },
     { 
+      id: 2,
       name: 'Nombre del producto 2', 
       store: 'Supermercado', 
       price: 30, 
       precioPorUnidad: '3.00€/unidad' 
     },
     { 
+      id: 3,
       name: 'Nombre del producto 3', 
       store: 'Supermercado', 
       price: 40, 
       precioPorUnidad: '1.80€/litro' 
     },
     { 
+      id: 4,
       name: 'Nombre del producto 4', 
       store: 'Supermercado', 
       price: 20, 
       precioPorUnidad: '0.90€/100g' 
     },
     { 
+      id: 5,
       name: 'Nombre del producto 5', 
       store: 'Supermercado', 
       price: 30, 
       precioPorUnidad: '4.50€/kg' 
     },
     { 
+      id:6,
       name: 'Nombre del producto 6', 
       store: 'Supermercado', 
       price: 40, 
@@ -126,6 +132,11 @@ export class BuscarProductoPage {
     console.log(`Ordenando por ${category} en orden ${order}`);
   }
 
+  goToProduct(product: any) {
+    console.log('Redirigiendo a producto:', product.id); // ✅ Debug: Verifica en la consola
+    this.router.navigate(['/producto', product.id]); // ✅ Redirige a la página del producto con su ID
+  }
+
   // Añadir producto a favoritos
   addToFavorites(product: any) {
     console.log(`Añadido ${product.name} a favoritos`);
@@ -133,7 +144,7 @@ export class BuscarProductoPage {
 
   // Navegación
   goToHome() {
-    console.log("Ir a Inicio");
+    this.router.navigate(['/buscar-producto']);
   }
 
   goToFavorites() {

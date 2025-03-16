@@ -4,6 +4,7 @@ import { HomePage } from './home/home.page';
 import { LoginPage } from './login/login.page';
 import { RegisterPage } from './register/register.page';
 import { FavoritosPage } from './favoritos/favoritos.page';
+import { ProductoPage } from './producto/producto.page';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -17,7 +18,12 @@ const routes: Routes = [
   {
     path: 'favoritos',
     component: FavoritosPage,
+  },
+  {
+    path: 'producto',
+    loadChildren: () => import('./producto/producto.module').then(m => m.ProductoPageModule) // ✅ Verifica que esta línea exista
   }
+
 
 ];
 

@@ -1,0 +1,46 @@
+<ion-content>
+  <!-- Contenedor General -->
+  <div class="main-container">
+
+    <!-- Barra Lateral -->
+    <!-- Barra Lateral -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <img src="assets/lLogo.png" alt="Logo" class="sidebar-icon logo" (click)="goToHome()">
+        <ion-icon name="star" class="sidebar-icon favoritos" (click)="irAFavoritos()"></ion-icon>
+        <ion-icon name="person" class="sidebar-icon profile" (click)="goToProfile()"></ion-icon>
+        <ion-icon name="settings" class="sidebar-icon settings" (click)="goToSettings()"></ion-icon>
+      </div>
+      <div class="sidebar-bottom">
+        <ion-icon name="log-out" class="sidebar-icon sign-out" (click)="logout()"></ion-icon>
+      </div>
+    </aside>
+
+
+    <!-- Contenido Principal -->
+    <div class="content-area">
+      <!-- Botón de Cerrar -->
+      <ion-icon name="close" class="close-button" (click)="cerrarPagina()"></ion-icon>
+
+      <!-- Sección Izquierda: Imagen del Producto y Tienda -->
+      <div class="left-section">
+        <h2 class="product-name">{{ producto.nombre }}</h2>
+        <img [src]="producto.imagen" alt="Imagen del producto" class="product-image" />
+        <img [src]="producto.supermercadoLogo" alt="Logo supermercado" class="store-logo" />
+        <ion-button class="buy-button" expand="full">Comprar este producto</ion-button>
+      </div>
+
+      <!-- Sección Derecha: Gráficas -->
+      <div class="right-section">
+        <div class="chart-container small-chart">
+          <h3>Por 100g</h3>
+          <canvas id="nutritionalChart"></canvas>
+        </div>
+        <div class="chart-container">
+          <h3>Precio</h3>
+          <canvas id="priceChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
