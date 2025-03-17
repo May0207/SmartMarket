@@ -24,6 +24,7 @@
         <img src="assets/user-avatar.jpg" alt="Usuario">
       </ion-avatar>
     </div>
+    
 
 
     <!-- Contenido Principal -->
@@ -35,7 +36,7 @@
         <ion-row>
           <ion-col size="6" size-md="3" *ngFor="let producto of productosFavoritos">
             <ion-card class="product-card">
-              <img [src]="producto.imagen" alt="Imagen del producto"/>
+              <img class="product-img" [src]="producto.imagen" alt="Imagen del producto"/>
               <ion-card-content>
                 <div class="product-info">
                   <h3>{{ producto.nombre }}</h3>

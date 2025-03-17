@@ -46,7 +46,7 @@ export class ProductoPage implements AfterViewInit {
 
   cerrarPagina() {
     // Lógica para cerrar la página
-    console.log('Cerrando página...');
+    this.router.navigate(['/buscar-producto']);
   }
 
   ngAfterViewInit() {

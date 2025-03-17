@@ -126,6 +126,10 @@ ion-content {
   margin-left: auto; /* Alinea a la derecha */
 }
 
+.product-img{
+  height: 150px;
+}
+
 /* Contenedor del título "Productos" */
 .page-title-container {
   position: fixed; /* Fija el título */
@@ -392,6 +396,5 @@ ion-button {
 
 img {
   width: 100%; // Asegura que todas las imágenes ocupen el mismo ancho
-  height: 150px; // Tamaño fijo para todas las imágenes
   object-fit: contain; // Ajusta la imagen sin recortarla
 }

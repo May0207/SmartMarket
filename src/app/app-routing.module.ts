@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: 'producto',
-    loadChildren: () => import('./producto/producto.module').then(m => m.ProductoPageModule) // ✅ Verifica que esta línea exista
+    loadChildren: () => import('./producto/producto.module').then(m => m.ProductoPageModule)
   }
 
 
