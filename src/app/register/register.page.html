@@ -1,54 +1,46 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Registro</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content class="ion-padding">
-  <ion-card class="login-card">
-    <ion-card-header>
-      <ion-card-title>Crear una cuenta</ion-card-title>
-      <ion-card-subtitle>Ingresa tus datos</ion-card-subtitle>
-    </ion-card-header>
 
-    <ion-card-content>
-      <ion-item>
-        <ion-label position="floating">Nombre</ion-label>
-        <ion-input type="text" [(ngModel)]="nombre"></ion-input>
-      </ion-item>
+<ion-content class="ion-padding register-container">
+  <div class="register-box">
+    <div class="icon-container">
+      <ion-icon name="person-add-outline"></ion-icon>
+    </div>
 
-      <ion-item>
-        <ion-label position="floating">Apellido 1</ion-label>
-        <ion-input type="text" [(ngModel)]="apellido1"></ion-input>
-      </ion-item>
+    <ion-item class="input-item">
+      <ion-icon name="person-outline" slot="start"></ion-icon>
+      <ion-input type="text" placeholder="Nombre" [(ngModel)]="nombre"></ion-input>
+    </ion-item>
 
-      <ion-item>
-        <ion-label position="floating">Apellido 2</ion-label>
-        <ion-input type="text" [(ngModel)]="apellido2"></ion-input>
-      </ion-item>
+    <ion-item class="input-item">
+      <ion-icon name="person-outline" slot="start"></ion-icon>
+      <ion-input type="text" placeholder="Apellido 1" [(ngModel)]="apellido1"></ion-input>
+    </ion-item>
 
-      <ion-item>
-        <ion-label position="floating">Email</ion-label>
-        <ion-input type="email" [(ngModel)]="email"></ion-input>
-      </ion-item>
+    <ion-item class="input-item">
+      <ion-icon name="person-outline" slot="start"></ion-icon>
+      <ion-input type="text" placeholder="Apellido 2" [(ngModel)]="apellido2"></ion-input>
+    </ion-item>
 
-      <ion-item>
-        <ion-label position="floating">Contraseña</ion-label>
-        <ion-input type="password" [(ngModel)]="password"></ion-input>
-      </ion-item>
+    <ion-item class="input-item">
+      <ion-icon name="mail-outline" slot="start"></ion-icon>
+      <ion-input type="email" placeholder="Email" [(ngModel)]="email"></ion-input>
+    </ion-item>
 
-      <ion-item>
-        <ion-label position="floating">Fecha de nacimiento</ion-label>
-        <ion-input type="date" [(ngModel)]="birthdate"></ion-input>
-      </ion-item>
+    <ion-item class="input-item">
+      <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+      <ion-input type="password" placeholder="Contraseña" [(ngModel)]="password"></ion-input>
+    </ion-item>
 
-      <ion-button expand="full" (click)="register()">Registrarse</ion-button>
+    <ion-item class="input-item">
+      <ion-icon name="calendar-outline" slot="start"></ion-icon>
+      <ion-input type="date" [(ngModel)]="birthdate"></ion-input>
+    </ion-item>
 
-      <p class="text-center">
-        ¿Ya tienes una cuenta?
-        <a (click)="goToLogin()" class="link">Inicia sesión</a>
-      </p>
+    <ion-button expand="full" (click)="register()">REGISTRARSE</ion-button>
 
-    </ion-card-content>
-  </ion-card>
+    <p class="text-center">
+      ¿Ya tienes una cuenta?
+      <a (click)="goToLogin()" class="link">Inicia sesión</a>
+    </p>
+  </div>
 </ion-content>
