@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-favoritos',
-  standalone: true, // 🔥 Esto es clave para evitar problemas con NgModule
+  standalone: true,
   imports: [CommonModule, IonicModule],
   templateUrl: './favoritos.page.html',
   styleUrls: ['./favoritos.page.scss'],
@@ -21,6 +21,8 @@ export class FavoritosPage {
   showSupermarkets = false;
   showPrice = false;
   showNutrition = false;
+  isPopoverOpen = false;
+  popoverEvent: any;
 
   productosFavoritos = [
     {
@@ -74,34 +76,46 @@ export class FavoritosPage {
     sortBy(category: string, order: string) {
       console.log(`Ordenando por ${category} en orden ${order}`);
     }
-  
+
     // Añadir producto a favoritos
     addToFavorites(product: any) {
       console.log(`Añadido ${product.name} a favoritos`);
     }
-  
+
     // Navegación
     goToHome() {
       this.router.navigate(['/buscar-producto']);
     }
-  
+
     goToFavorites() {
       console.log("Ir a Favoritos");
     }
-  
+
     goToProfile() {
       console.log("Ir a Perfil");
     }
-  
+
     goToSettings() {
       console.log("Ir a Configuración");
     }
-  
+
     logout() {
       console.log("Cerrar Sesión");
     }
-  
+
     irAFavoritos() {
       this.router.navigate(['/favoritos']);
     }
+  openPopover(event: Event) {
+    this.popoverEvent = event;
+    this.isPopoverOpen = true;
+  }
+
+  goToLogin() {
+    this.router.navigate(['/login']);
+  }
+
+  goToRegister() {
+    this.router.navigate(['/register']);
+  }
 }
