@@ -2,7 +2,6 @@
 .main-container {
   display: flex;
   height: 100%;
-  background-color: #ffffff;
   padding: 0px;
 }
  /* Barra lateral (fija) */
@@ -87,7 +86,7 @@
   flex-grow: 1;
   justify-content: space-between;
   align-items: flex-start;
-  background: white;
+  background: #f2f2f2;
   border-radius: 15px;
   padding: 30px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -114,8 +113,11 @@
 }
 
 .product-name {
+  font-family: 'Poppins', sans-serif;
   font-size: 24px;
-  font-weight: bold;
+  font-weight: 600; /* Semibold */
+  margin: 10px 0;
+  color: #848484;
 }
 
 .left-section {
@@ -153,40 +155,22 @@
 }
 
 .product-details {
-  font-size: 14px;
-  color: #333;
-  width: 20vw;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18x;
+  font-weight: 600; /* Semibold */
+  margin: 10px 0;
+  color: #848484;
 }
 
-.buy-button {
-  width: 100%;
-  background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%); // Degradado sutil
-  color: white;
+.buy-button::part(native) {
+  background-color: #6F4FF2;
+  border-radius: 9px;
+  font-family: 'Poppins', sans-serif;
   font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
-  border: none;
-  border-radius: 12px;
-  padding: 12px 0;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease-in-out;
-  
-  /* Eliminamos los estilos adicionales de fondo en Ionic */
-  --background: transparent;
-  --box-shadow: none;
-  --border-radius: 12px;
-  
-  &:hover {
-    background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
-    transform: scale(1.05);
-  }
-
-  &:active {
-    background: #1d4ed8;
-    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
-    transform: scale(0.98);
-  }
+  color: white;
+  margin-top: 15px;
+  width: 100%;
+  box-shadow: none; /* Sin sombra */
 }
 
 
