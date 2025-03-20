@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { HomePage } from './home/home.page';
+
 import { LoginPage } from './login/login.page';
 import { RegisterPage } from './register/register.page';
 import { FavoritosPage } from './favoritos/favoritos.page';
 import { ProductoPage } from './producto/producto.page';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', loadComponent: () => import('./home/home.page').then(m => m.HomePage) },
+  { path: '', redirectTo: 'buscar-producto', pathMatch: 'full' },
   { path: 'login', loadComponent: () => import('./login/login.page').then(m => m.LoginPage) },
   { path: 'register', loadComponent: () => import('./register/register.page').then(m => m.RegisterPage) },
   {
