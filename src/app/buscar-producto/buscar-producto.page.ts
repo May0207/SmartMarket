@@ -102,17 +102,23 @@ export class BuscarProductoPage {
   irAFavoritos() {
     this.router.navigate(['/favoritos']);
   }
-
-  openPopover(event: Event) {
-    this.popoverEvent = event;
+  
+  presentPopover(ev: any) {
+    this.popoverEvent = ev;
     this.isPopoverOpen = true;
   }
-
+  
   goToLogin() {
-    this.router.navigate(['/login']);
+    this.isPopoverOpen = false;
+    setTimeout(() => {
+      this.router.navigate(['/login']);
+    }, 100); 
   }
-
+  
   goToRegister() {
-    this.router.navigate(['/register']);
+    this.isPopoverOpen = false;
+    setTimeout(() => {
+      this.router.navigate(['/register']);
+    }, 100);
   }
 }

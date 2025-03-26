@@ -120,11 +120,41 @@ ion-content {
 }
 
 /* Avatar del usuario */
-.user-avatar {
+.profile-image {
   width: 40px;
   height: 40px;
-  margin-left: auto; /* Alinea a la derecha */
+  border-radius: 50%;
+  cursor: pointer;
 }
+::ng-deep .custom-popover .popover-content {
+  --width: 200px;
+  --background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding: 8px 0;
+}
+
+//desplegable
+::ng-deep .custom-popover ion-item {
+  --background: transparent;
+  --color: #333;
+  font-weight: 500;
+  font-size: 16px;
+  --border-style: none;
+  --inner-border-width: 0;
+}
+
+::ng-deep .custom-popover ion-item:hover {
+  --background: #f1f1f1;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+::ng-deep .custom-popover ion-list {
+  padding: 0;
+}
+
+
 
 /* Contenedor del título "Productos" */
 .page-title-container {

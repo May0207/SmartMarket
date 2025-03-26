@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 
 
 export class FavoritosPage {
+product: any;
 
   constructor(private router: Router) {}
   // Variables para controlar los dropdowns
@@ -26,6 +27,7 @@ export class FavoritosPage {
 
   productosFavoritos = [
     {
+      id: 1,
       nombre: 'Plátanos 800g',
       supermercado: 'Carrefour',
       precio: '2.50',
@@ -33,6 +35,7 @@ export class FavoritosPage {
       imagen: 'assets/platanos.jpg'
     },
     {
+      id:2,
       nombre: 'Leche Entera 1L',
       supermercado: 'Día',
       precio: '1.20',
@@ -40,6 +43,7 @@ export class FavoritosPage {
       imagen: 'assets/leche.jpg'
     },
     {
+      id:3,
       nombre: 'Pan Integral 500g',
       supermercado: 'Hipercor',
       precio: '2.00',
@@ -47,6 +51,7 @@ export class FavoritosPage {
       imagen: 'assets/pan-integral.jpeg'
     },
     {
+      id:4,
       nombre: 'Plátanos 800g',
       supermercado: 'Carrefour',
       precio: '2.50',
@@ -54,6 +59,7 @@ export class FavoritosPage {
       imagen: 'assets/platanos.jpg'
     },
     {
+      id:5,
       nombre: 'Leche Entera 1L',
       supermercado: 'Día',
       precio: '1.20',
@@ -61,6 +67,7 @@ export class FavoritosPage {
       imagen: 'assets/leche.jpg'
     },
     {
+      id:6,
       nombre: 'Pan Integral 500g',
       supermercado: 'Hipercor',
       precio: '2.00',
@@ -71,6 +78,11 @@ export class FavoritosPage {
 
   toggleFavorito(producto: any) {
     this.productosFavoritos = this.productosFavoritos.filter(p => p !== producto);
+  }
+
+  goToProduct(producto:any) {
+    console.log('Redirigiendo a producto:', producto.id);
+    this.router.navigate(['/producto', producto.id]);
   }
     // Ordenar productos
     sortBy(category: string, order: string) {
