@@ -1,0 +1,90 @@
+<ion-content>
+  <!-- Contenedor principal con layout de dos columnas -->
+  <div class="main-container">
+    <!-- Barra lateral fija con navegación -->
+    <aside class="sidebar">
+      <!-- Íconos superiores -->
+      <div class="sidebar-top">
+        <!-- Logo (clic para ir al home) -->
+        <img
+          src="assets/lLogo.png"
+          alt="Logo"
+          class="sidebar-icon logo"
+          (click)="goToHome()"
+        />
+
+        <!-- Navegación: Favoritos, Perfil y Configuración -->
+        <ion-icon
+          name="star"
+          class="sidebar-icon favoritos"
+          (click)="irAFavoritos()"
+        ></ion-icon>
+
+        <ion-icon
+          name="person"
+          class="sidebar-icon profile"
+          (click)="goToProfile()"
+        ></ion-icon>
+
+        <ion-icon
+          name="settings"
+          class="sidebar-icon settings"
+          (click)="goToSettings()"
+        ></ion-icon>
+      </div>
+
+      <!-- Ícono de cierre de sesión (parte inferior) -->
+      <div class="sidebar-bottom">
+        <ion-icon
+          name="log-out"
+          class="sidebar-icon sign-out"
+          (click)="logout()"
+        ></ion-icon>
+      </div>
+    </aside>
+
+    <!-- Área de contenido principal -->
+    <div class="content-area">
+      <!-- Tarjeta de perfil de usuario -->
+      <ion-card class="perfil-card">
+        <ion-card-header>
+          <ion-card-title>Perfil de usuario</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <!-- Campos del formulario -->
+          <ion-item>
+            <ion-label position="stacked">Nombre</ion-label>
+            <ion-input placeholder="Tu nombre"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Primer apellido</ion-label>
+            <ion-input placeholder="Tu 1Apellido"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Segundo apellido</ion-label>
+            <ion-input placeholder="Tu 2Apellido"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Email</ion-label>
+            <ion-input
+              type="email"
+              placeholder="Correo electrónico"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Contraseña</ion-label>
+            <ion-input type="password" placeholder="Contraseña"></ion-input>
+          </ion-item>
+        </ion-card-content>
+
+        <!-- Botón de guardar -->
+        <ion-button class="modificar-button">Guardar</ion-button>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

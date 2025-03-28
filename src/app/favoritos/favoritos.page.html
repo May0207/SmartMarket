@@ -1,24 +1,47 @@
 <ion-content>
   <!-- Contenedor General -->
   <div class="main-container">
-
     <!-- Barra Lateral -->
     <aside class="sidebar">
       <div class="sidebar-top">
-        <img src="assets/lLogo.png" alt="Logo" class="sidebar-icon logo" (click)="goToHome()">
-        <ion-icon name="star" class="sidebar-icon favoritos" (click)="irAFavoritos()"></ion-icon>
-        <ion-icon name="person" class="sidebar-icon profile" (click)="goToProfile()"></ion-icon>
-        <ion-icon name="settings" class="sidebar-icon settings" (click)="goToSettings()"></ion-icon>
+        <img
+          src="assets/lLogo.png"
+          alt="Logo"
+          class="sidebar-icon logo"
+          (click)="goToHome()"
+        />
+        <ion-icon
+          name="star"
+          class="sidebar-icon favoritos"
+          (click)="irAFavoritos()"
+        ></ion-icon>
+        <ion-icon
+          name="person"
+          class="sidebar-icon profile"
+          (click)="goToProfile()"
+        ></ion-icon>
+        <ion-icon
+          name="settings"
+          class="sidebar-icon settings"
+          (click)="goToSettings()"
+        ></ion-icon>
       </div>
       <div class="sidebar-bottom">
-        <ion-icon name="log-out" class="sidebar-icon sign-out" (click)="logout()"></ion-icon>
+        <ion-icon
+          name="log-out"
+          class="sidebar-icon sign-out"
+          (click)="logout()"
+        ></ion-icon>
       </div>
     </aside>
 
     <!-- Contenedor personalizado para el encabezado -->
     <div class="custom-header">
       <!-- Buscador -->
-      <ion-searchbar class="custom-searchbar" placeholder="Buscar"></ion-searchbar>
+      <ion-searchbar
+        class="custom-searchbar"
+        placeholder="Buscar"
+      ></ion-searchbar>
 
       <!-- Botón de menú en lugar del avatar -->
       <ion-button fill="clear" (click)="openPopover($event)">
@@ -26,7 +49,11 @@
       </ion-button>
 
       <!-- Popover para mostrar opciones del usuario -->
-      <ion-popover [isOpen]="isPopoverOpen" [event]="popoverEvent" (didDismiss)="isPopoverOpen = false">
+      <ion-popover
+        [isOpen]="isPopoverOpen"
+        [event]="popoverEvent"
+        (didDismiss)="isPopoverOpen = false"
+      >
         <ng-template>
           <ion-list>
             <ion-item (click)="goToLogin()">Iniciar sesión</ion-item>
@@ -36,8 +63,6 @@
       </ion-popover>
     </div>
 
-
-
     <!-- Contenido Principal -->
     <div class="content-area">
       <h1 class="page-title">Tus Productos Favoritos</h1>
@@ -45,17 +70,35 @@
       <!-- Lista de productos favoritos -->
       <ion-grid class="product-grid">
         <ion-row>
-          <ion-col size="6" size-md="3" *ngFor="let producto of productosFavoritos">
-            <ion-card class="product-card" (click)="goToProduct(producto)" tappable>
-              <img class="product-img" [src]="producto.imagen" alt="Imagen del producto"/>
+          <ion-col
+            size="6"
+            size-md="3"
+            *ngFor="let producto of productosFavoritos"
+          >
+            <ion-card
+              class="product-card"
+              (click)="goToProduct(producto)"
+              tappable
+            >
+              <img
+                class="product-img"
+                [src]="producto.imagen"
+                alt="Imagen del producto"
+              />
               <ion-card-content>
                 <div class="product-info">
                   <h3>{{ producto.nombre }}</h3>
                   <p>{{ producto.supermercado }}</p>
                   <p>Precio: {{ producto.precio }}€</p>
-                  <p class="precio-por-unidad">Precio por unidad: {{ producto.precioUnidad }} €/unidad</p>
+                  <p class="precio-por-unidad">
+                    Precio por unidad: {{ producto.precioUnidad }} €/unidad
+                  </p>
                 </div>
-                <ion-button fill="clear" color="danger" (click)="toggleFavorito(producto)">
+                <ion-button
+                  fill="clear"
+                  color="danger"
+                  (click)="toggleFavorito(producto)"
+                >
                   <ion-icon name="heart"></ion-icon> Eliminar
                 </ion-button>
               </ion-card-content>
