@@ -2,22 +2,24 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 import { LoginPage } from './login/login.page';
-import { RegisterPage } from './register/register.page';
 import { FavoritosPage } from './favoritos/favoritos.page';
 import { ProductoPage } from './producto/producto.page';
 import { PerfilPage } from './perfil/perfil.page';
 
 const routes: Routes = [
   { path: '', redirectTo: 'buscar-producto', pathMatch: 'full' },
+
   {
     path: 'login',
-    loadComponent: () => import('./login/login.page').then((m) => m.LoginPage),
+    loadComponent: () =>
+      import('./login/login.page').then((m) => m.LoginPage),
   },
   {
     path: 'register',
     loadComponent: () =>
       import('./register/register.page').then((m) => m.RegisterPage),
   },
+  
   {
     path: 'buscar-producto',
     loadChildren: () =>

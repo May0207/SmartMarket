@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const bcrypt = require("bcrypt");
 const db = require("./db");
 
 const app = express();
@@ -9,10 +10,12 @@ const PORT = 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
+// Ruta base
 app.get("/", (req, res) => {
   res.send("API funcionando correctamente");
 });
 
+// RUTA DE PRODUCTOS — NO TOCAR
 app.get("/api/productos", async (req, res) => {
   try {
     const limit = parseInt(req.query.limit) || 25;
@@ -100,6 +103,65 @@ app.get("/api/productos", async (req, res) => {
   }
 });
 
+// RUTA DE REGISTRO — FUNCIONA CON TABLA `usuario`
+app.post("/register", async (req, res) => {
+  const { nombre, apellido1, apellido2, email, password, birthdate } = req.body;
+
+  try {
+    const [existing] = await db.query("SELECT * FROM usuario WHERE email = ?", [email]);
+    if (existing.length > 0) {
+      return res.status(400).json({ error: "El correo ya está registrado" });
+    }
+
+    const hashed = await bcrypt.hash(password, 10);
+    await db.query(`
+      INSERT INTO usuario (nombre, apellido1, apellido2, email, pass, rol, fecha_creacion)
+      VALUES (?, ?, ?, ?, ?, 'cliente', ?)
+    `, [nombre, apellido1, apellido2, email, hashed, birthdate]);
+
+    res.status(201).json({ message: "Registro exitoso" });
+  } catch (err) {
+    console.error("Error en /register:", err);
+    res.status(500).json({ error: "Error en el registro", message: err.message });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});
+// RUTA DE LOGIN — NUEVA
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Verificamos si el usuario existe
+    const [users] = await db.query("SELECT * FROM usuario WHERE email = ?", [email]);
+
+    if (users.length === 0) {
+      return res.status(401).json({ error: "Usuario no encontrado" });
+    }
+
+    const user = users[0];
+
+    // Comparamos la contraseña ingresada con la almacenada (hashed)
+    const passwordMatch = await bcrypt.compare(password, user.pass);
+
+    if (!passwordMatch) {
+      return res.status(401).json({ error: "Contraseña incorrecta" });
+    }
+
+    // Si todo va bien, respondemos con datos del usuario (sin contraseña)
+    res.json({
+      message: "Login exitoso",
+      user: {
+        id_usuario: user.id_usuario,
+        nombre: user.nombre,
+        email: user.email,
+        rol: user.rol
+      }
+    });
+  } catch (err) {
+    console.error("Error en /login:", err);
+    res.status(500).json({ error: "Error en el login", message: err.message });
+  }
 });

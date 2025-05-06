@@ -1,33 +1,33 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, NavController, ToastController } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-register',
+  standalone: true,
+  imports: [CommonModule, IonicModule, FormsModule],
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
-  standalone: true,
-  imports: [CommonModule, IonicModule, FormsModule]
 })
 export class RegisterPage {
-  nombre: string = '';
-  apellido1: string = '';
-  apellido2: string = '';
-  email: string = '';
-  password: string = '';
-  birthdate: string = '';
+  nombre = '';
+  apellido1 = '';
+  apellido2 = '';
+  email = '';
+  password = '';
+  birthdate = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private navCtrl: NavController,
+    private toastCtrl: ToastController
+  ) {}
 
   async register() {
-    if (!this.isAdult(this.birthdate)) {
-      alert('Debes ser mayor de 18 años para registrarte.');
-      return;
-    }
-
     try {
       await this.authService.register(
         this.nombre,
@@ -37,21 +37,24 @@ export class RegisterPage {
         this.password,
         this.birthdate
       );
-      this.router.navigate(['/home']);
+      const toast = await this.toastCtrl.create({
+        message: 'Registro exitoso',
+        duration: 2000,
+        color: 'success',
+      });
+      toast.present();
+      this.navCtrl.navigateForward('/login');
     } catch (error) {
-      console.error('Error en registro:', error);
+      const toast = await this.toastCtrl.create({
+        message: (error as any)?.error?.error || 'Error al registrar usuario',
+        duration: 2000,
+        color: 'danger',
+      });
+      toast.present();
     }
   }
 
-  isAdult(birthdate: string): boolean {
-    const birthDate = new Date(birthdate);
-    const today = new Date();
-    const age = today.getFullYear() - birthDate.getFullYear();
-
-    return age > 18 || (age === 18 && today >= new Date(birthDate.setFullYear(today.getFullYear())));
-  }
-
   goToLogin() {
-    this.router.navigate(['/login']);
+    this.navCtrl.navigateBack('/login');
   }
 }
