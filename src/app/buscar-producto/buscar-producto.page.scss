@@ -259,14 +259,14 @@ ion-content {
   margin-top: 10px; /* Espacio entre los ítems y el botón */
   width: auto; /* Ancho automático */
   margin-left: auto; /* Alinea el botón a la derecha */
-  display: flex; /* Para alinear el texto a la derecha */
+  display: flex; /* Para alinear xel texto a la derecha */
   justify-content: flex-end; /* Alinea el texto a la derecha */
 }
 
 /* Lista de productos (con desplazamiento pero sin barra visible) */
 .product-grid {
   overflow-y: scroll; /* Permite el desplazamiento */
-  max-height: calc(100vh - 200px); /* Ajusta la altura según sea necesario */
+  max-height: calc(100vh - 240px); /* Ajusta la altura según sea necesario */
   margin-top: 0; /* Elimina el margen superior para alinear con los filtros */
   padding-right: 20px; /* Evita que el contenido se superponga con la barra lateral */
   padding-left: 0; /* Elimina el padding izquierdo */
@@ -310,8 +310,14 @@ ion-content {
 .product-card h3 {
   font-family: 'Poppins', sans-serif;
   font-size: 18px;
-  font-weight: 600; /* Semibold */
+  font-weight: 600;
   margin: 10px 0;
+  max-height: 48px; /* Limita el alto a 2 líneas aprox */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Número de líneas */
+  -webkit-box-orient: vertical;
 }
 
 /* Estilos para el resto del texto */
@@ -320,6 +326,17 @@ ion-content {
   font-size: 14px;
   margin: 5px 0;
 }
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  gap: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+}
+
 
 /* Estilos para el botón de "Añadir a favoritos" */
 .favorite-button::part(native) {
@@ -382,6 +399,44 @@ ion-content {
 .nutrition-dropdown ion-button.nutrition-button::part(native):hover {
   background-color: #f2f2f2; /* Fondo gris claro al hacer hover */
 }
+.product-card img {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  border-radius: 12px;
+  margin-top: 10px;
+  background-color: white;
+}
+.supermercado-logo {
+  height: 35px !important;
+  width: auto !important;
+  object-fit: contain !important;
+  display: block;
+}
+/* Alinea el botón de reset a la derecha */
+.reset-filters-button {
+  margin-left: auto;
+  margin-right: 80px; /* Ajusta el valor según cuánto a la izquierda lo quieras */
+  flex-shrink: 0;
+}
+
+
+/* Estilo visual del botón */
+.reset-button {
+  --background: #f4f4f4;
+  --color: #333;
+  --border-radius: 22px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: none;
+}
+
+
+
+
+
+
 /* Estilos para el texto del precio por unidad */
 .product-card p.precio-por-unidad {
   font-family: 'Poppins', sans-serif;
