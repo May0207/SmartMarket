@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
+import { AlertController } from '@ionic/angular';
 import { LoginPage } from './login/login.page';
 import { FavoritosPage } from './favoritos/favoritos.page';
 import { ProductoPage } from './producto/producto.page';

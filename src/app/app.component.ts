@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-
+import { AuthService } from '../services/auth.service';
+import { IonicModule, AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -9,34 +10,56 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class AppComponent {
   mostrarSidebar = true;
+  isLoggedIn = false;
+  rol: string | null = null;
+  isPopoverOpen = false;
+  popoverEvent: any;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private auth: AuthService,
+    private alertCtrl: AlertController
+  ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const rutasSinSidebar = ['/inicio', '/login', '/register'];
         this.mostrarSidebar = !rutasSinSidebar.includes(event.url);
+
+        // Estado del usuario
+        this.isLoggedIn = this.auth.isLoggedIn();
+        this.rol = this.auth.getUserRole();
       }
     });
   }
 
   goToHome() {
-    this.router.navigate(['/inicio']);
+    this.isPopoverOpen = false;
+    setTimeout(() => this.router.navigate(['/inicio']), 100);
   }
 
-  irAFavoritos() {
-    this.router.navigate(['/favoritos']);
+  goToFavoritos() {
+    this.isPopoverOpen = false;
+    setTimeout(() => this.router.navigate(['/favoritos']), 100);
+  }
+
+  goToProducto() {
+    this.isPopoverOpen = false;
+    setTimeout(() => this.router.navigate(['/buscar-producto']), 100);
   }
 
   goToProfile() {
-    this.router.navigate(['/perfil']);
+    this.isPopoverOpen = false;
+    setTimeout(() => this.router.navigate(['/perfil']), 100);
   }
 
   goToRegister() {
-    this.router.navigate(['/register']);
+    this.isPopoverOpen = false;
+    setTimeout(() => this.router.navigate(['/register']), 100);
   }
 
   goToLogin() {
-    this.router.navigate(['/login']);
+    this.isPopoverOpen = false;
+    setTimeout(() => this.router.navigate(['/login']), 100);
   }
 
   goToSettings() {
@@ -44,8 +67,35 @@ export class AppComponent {
     this.router.navigate(['/configuracion']);
   }
 
+  confirmLogout() {
+    this.alertCtrl
+      .create({
+        header: 'Cerrar sesión',
+        message: '¿Estás seguro de que quieres cerrar sesión?',
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+          },
+          {
+            text: 'Cerrar sesión',
+            handler: () => {
+              this.auth.logout();
+              this.isPopoverOpen = false;
+              // Simplemente actualiza la vista, sin redirigir
+            },
+          },
+        ],
+      })
+      .then((alert) => alert.present());
+  }
+
   logout() {
-    // Aquí podrías limpiar el token de sesión, etc.
-    this.router.navigate(['/login']);
+    this.confirmLogout();
+  }
+
+  presentPopover(ev: any) {
+    this.popoverEvent = ev;
+    this.isPopoverOpen = true;
   }
 }

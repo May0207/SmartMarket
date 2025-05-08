@@ -8,26 +8,41 @@
         (click)="goToHome()"
       />
 
+      <!-- Solo si el usuario está logueado -->
       <ion-icon
-        name="star"
+        name="storefront"
         class="sidebar-icon favoritos"
-        (click)="irAFavoritos()"
+        (click)="goToProducto()"
       ></ion-icon>
 
+      <!-- Solo si el usuario está logueado -->
       <ion-icon
+        *ngIf="isLoggedIn"
+        name="star"
+        class="sidebar-icon favoritos"
+        (click)="goToFavoritos()"
+      ></ion-icon>
+
+      <!-- Solo si es cliente -->
+      <ion-icon
+        *ngIf="isLoggedIn"
         name="person"
         class="sidebar-icon profile"
         (click)="goToProfile()"
       ></ion-icon>
 
+      <!-- Solo si es admin -->
       <ion-icon
+        *ngIf="isLoggedIn"
+        &&="rol === 'admin'"
         name="settings"
         class="sidebar-icon settings"
         (click)="goToSettings()"
       ></ion-icon>
     </div>
 
-    <div class="sidebar-bottom">
+    <!-- Cierre de sesión visible si está logueado -->
+    <div class="sidebar-bottom" *ngIf="isLoggedIn">
       <ion-icon
         name="log-out"
         class="sidebar-icon sign-out"

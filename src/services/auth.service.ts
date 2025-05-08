@@ -59,4 +59,9 @@ export class AuthService {
     this.currentUser = null;
     localStorage.removeItem('user');
   }
+
+  getUserRole(): string | null {
+    const user = this.getCurrentUser();
+    return user?.rol || null;
+  }
 }
