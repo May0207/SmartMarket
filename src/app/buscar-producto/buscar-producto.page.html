@@ -124,6 +124,15 @@
           <ion-col size="6" size-md="3" *ngFor="let product of products">
             <ion-card class="product-card" (click)="goToProduct(product)" tappable>
               <img [src]="product.imagen" />
+      
+              <!-- Icono de favorito en la esquina -->
+              <ion-icon
+                *ngIf="esFavorito(product.id)"
+                name="heart"
+                class="heart-icon"
+                color="danger"
+              ></ion-icon>
+      
               <ion-card-content>
                 <h3>{{ product.name }}</h3>
                 <img *ngIf="product.supermercado" [src]="getSuperLogo(product.supermercado)" alt="{{ product.supermercado }}" class="supermercado-logo" />
@@ -139,6 +148,7 @@
           </ion-col>
         </ion-row>
       </ion-grid>
+      
 
       <div class="pagination-controls" *ngIf="!loading && !error">
         <ion-button (click)="previousPage()" [disabled]="currentPage === 1">Anterior</ion-button>

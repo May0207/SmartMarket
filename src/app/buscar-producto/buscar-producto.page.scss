@@ -184,6 +184,18 @@ ion-content {
   margin-top: 100px; /* Reducido para mover los filtros más arriba */
 }
 
+.heart-icon {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 20px;
+  z-index: 10;
+}
+
+ion-card {
+  position: relative;
+}
+
 /* Filtros */
 .filter-container {
   position: relative; /* Necesario para posicionar el contenido del filtro */

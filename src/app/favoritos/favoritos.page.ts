@@ -5,16 +5,20 @@ import { Router } from '@angular/router';
 import { FavoritesService } from '../../services/favorites.service';
 import { AuthService } from '../../services/auth.service';
 import { ToastController } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
+
 
 
 @Component({
   selector: 'app-favoritos',
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [IonicModule, FormsModule, CommonModule],
   templateUrl: './favoritos.page.html',
   styleUrls: ['./favoritos.page.scss'],
 })
 export class FavoritosPage implements OnInit {
+  searchTerm: string = '';
+  productosFiltrados: any[] = []; 
   productosFavoritos: any[] = [];
 
   popoverEvent: Event | null = null;
@@ -27,8 +31,6 @@ export class FavoritosPage implements OnInit {
     private toastController: ToastController
   ) {}
 
-  
-  
   ngOnInit() {
     const user = this.authService.getCurrentUser();
     if (!user) {
@@ -37,12 +39,25 @@ export class FavoritosPage implements OnInit {
     }
   
     this.favoritesService.getFavorites(user.id_usuario).subscribe({
-      next: (data) => this.productosFavoritos = data,
+      next: (data) => {
+        this.productosFavoritos = data;
+        this.productosFiltrados = data; // copia inicial
+      },
       error: (err) => {
         console.error('Error cargando favoritos:', err);
       }
     });
   }
+  
+  onSearchChange() {
+    const term = this.searchTerm.toLowerCase();
+  
+    this.productosFiltrados = this.productosFavoritos.filter(p =>
+      p.nombre.toLowerCase().includes(term) ||
+      p.supermercado?.toLowerCase().includes(term)
+    );
+  }
+  
   
 
   async presentToast(message: string) {
@@ -62,6 +77,7 @@ export class FavoritosPage implements OnInit {
     this.favoritesService.removeFavorite(user.id_usuario, producto.id).subscribe({
       next: () => {
         this.productosFavoritos = this.productosFavoritos.filter(p => p.id !== producto.id);
+        this.productosFiltrados = this.productosFiltrados.filter(p => p.id !== producto.id);
         this.presentToast('Producto eliminado de favoritos');
       },
       error: (err) => {

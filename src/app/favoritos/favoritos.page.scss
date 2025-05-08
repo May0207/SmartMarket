@@ -158,6 +158,19 @@ ion-content {
   margin-top: 100px; /* Reducido para mover los filtros más arriba */
 }
 
+.no-favoritos {
+  text-align: center;
+  margin-top: 2rem;
+  color: var(--ion-color-medium);
+  font-size: 1.2rem;
+
+  ion-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+
 /* Filtros */
 .filter-container {
   position: relative; /* Necesario para posicionar el contenido del filtro */

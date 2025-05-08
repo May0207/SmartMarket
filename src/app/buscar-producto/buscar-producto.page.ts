@@ -38,6 +38,7 @@ interface Producto {
 })
 export class BuscarProductoPage implements OnInit {
   products: Producto[] = [];
+  favoritosIds: number[] = [];
   loading = false;
   error = false;
   currentPage = 1;
@@ -70,7 +71,16 @@ export class BuscarProductoPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loadProducts();
+      this.loadProducts();
+      const user = this.authService.getCurrentUser();
+    if (user) {
+      this.favoritesService.getFavorites(user.id_usuario).subscribe({
+        next: (data) => {
+          this.favoritosIds = data.map(p => p.id); // guarda solo los IDs
+        },
+        error: (err) => console.error('Error cargando favoritos:', err)
+      });
+    }
   }
 
   loadPage(page: number) {
@@ -269,20 +279,56 @@ export class BuscarProductoPage implements OnInit {
   addToFavorites(product: any) {
     const user = this.authService.getCurrentUser();
     if (!user) {
-      this.presentToast('Debes iniciar sesión');
+      this.presentToast('Debes iniciar sesión para guardar favoritos');
       return;
     }
   
     this.favoritesService.addFavorite(user.id_usuario, product).subscribe({
-      next: (res: any) => {
-        this.presentToast(res.message || 'Producto añadido');
+      next: () => {
+        // ✅ Añadimos el ID a favoritosIds si no estaba ya
+        if (!this.favoritosIds.includes(product.id)) {
+          this.favoritosIds.push(product.id);
+        }
+  
+        this.presentToast('Producto añadido a favoritos');
       },
-      error: (err: HttpErrorResponse) => {
-        console.error(err);
+      error: (err) => {
+        console.error('Error al añadir a favoritos:', err);
         this.presentToast('Error al añadir a favoritos');
-      }      
+      }
     });
-  }  
+  }
+  
+  
+  esFavorito(idProducto: number): boolean {
+    return this.favoritosIds.includes(idProducto);
+  }
+  
+  toggleFavorito(producto: any) {
+    const user = this.authService.getCurrentUser();
+    if (!user) return;
+  
+    if (this.esFavorito(producto.id)) {
+      // Eliminar de favoritos
+      this.favoritesService.removeFavorite(user.id_usuario, producto.id).subscribe({
+        next: () => {
+          this.favoritosIds = this.favoritosIds.filter(id => id !== producto.id);
+          this.presentToast('Eliminado de favoritos');
+        },
+        error: () => this.presentToast('Error al eliminar')
+      });
+    } else {
+      // Añadir a favoritos
+      this.favoritesService.addFavorite(user.id_usuario, producto).subscribe({
+        next: () => {
+          this.favoritosIds.push(producto.id);
+          this.presentToast('Añadido a favoritos');
+        },
+        error: () => this.presentToast('Error al añadir')
+      });
+    }
+  }
+  
   
   
 }

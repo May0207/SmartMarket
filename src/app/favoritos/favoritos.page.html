@@ -41,6 +41,7 @@
       <ion-searchbar
         class="custom-searchbar"
         placeholder="Buscar"
+        [(ngModel)]="searchTerm" (ionInput)="onSearchChange()"
       ></ion-searchbar>
     </div>
 
@@ -54,8 +55,15 @@
           <ion-col
             size="6"
             size-md="3"
-            *ngFor="let producto of productosFavoritos"
-          >
+            *ngFor="let producto of productosFiltrados">
+            
+            <ng-container *ngIf="productosFiltrados.length === 0">
+              <div class="no-favoritos">
+                <ion-icon name="sad-outline" size="large"></ion-icon>
+                <p>No tienes productos guardados en favoritos</p>
+              </div>
+            </ng-container>
+            
             <ion-card
               class="product-card"
               (click)="goToProduct(producto)"
