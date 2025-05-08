@@ -174,7 +174,8 @@ export class BuscarProductoPage implements OnInit {
   }
 
   toggleDropdown(filter: string) {
-    this.showSupermarkets = filter === 'supermarkets' ? !this.showSupermarkets : false;
+    this.showSupermarkets =
+      filter === 'supermarkets' ? !this.showSupermarkets : false;
     this.showPrice = filter === 'price' ? !this.showPrice : false;
     this.showNutrition = filter === 'nutrition' ? !this.showNutrition : false;
   }
@@ -218,22 +219,6 @@ export class BuscarProductoPage implements OnInit {
     this.products = [];
 
     this.loadProducts();
-  }
-
-  goToHome() {
-    this.router.navigate(['/buscar-producto']);
-  }
-
-  irAFavoritos() {
-    this.router.navigate(['/favoritos']);
-  }
-
-  goToProfile() {
-    console.log('Ir a perfil');
-  }
-
-  goToSettings() {
-    console.log('Ir a configuración');
   }
 
   openUrl(url: string) {

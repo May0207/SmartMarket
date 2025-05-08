@@ -1,48 +1,6 @@
 <ion-content>
   <!-- Contenedor principal con layout de dos columnas -->
   <div class="main-container">
-    <!-- Barra lateral fija con navegación -->
-    <aside class="sidebar">
-      <!-- Íconos superiores -->
-      <div class="sidebar-top">
-        <!-- Logo (clic para ir al home) -->
-        <img
-          src="assets/lLogo.png"
-          alt="Logo"
-          class="sidebar-icon logo"
-          (click)="goToHome()"
-        />
-
-        <!-- Navegación: Favoritos, Perfil y Configuración -->
-        <ion-icon
-          name="star"
-          class="sidebar-icon favoritos"
-          (click)="irAFavoritos()"
-        ></ion-icon>
-
-        <ion-icon
-          name="person"
-          class="sidebar-icon profile"
-          (click)="goToProfile()"
-        ></ion-icon>
-
-        <ion-icon
-          name="settings"
-          class="sidebar-icon settings"
-          (click)="goToSettings()"
-        ></ion-icon>
-      </div>
-
-      <!-- Ícono de cierre de sesión (parte inferior) -->
-      <div class="sidebar-bottom">
-        <ion-icon
-          name="log-out"
-          class="sidebar-icon sign-out"
-          (click)="logout()"
-        ></ion-icon>
-      </div>
-    </aside>
-
     <!-- Área de contenido principal -->
     <div class="content-area">
       <!-- Tarjeta de perfil de usuario -->

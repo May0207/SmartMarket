@@ -7,19 +7,18 @@ import { ProductoPage } from './producto/producto.page';
 import { PerfilPage } from './perfil/perfil.page';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'buscar-producto', pathMatch: 'full' },
+  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
 
   {
     path: 'login',
-    loadComponent: () =>
-      import('./login/login.page').then((m) => m.LoginPage),
+    loadComponent: () => import('./login/login.page').then((m) => m.LoginPage),
   },
   {
     path: 'register',
     loadComponent: () =>
       import('./register/register.page').then((m) => m.RegisterPage),
   },
-  
+
   {
     path: 'buscar-producto',
     loadChildren: () =>
@@ -39,6 +38,11 @@ const routes: Routes = [
     path: 'producto',
     loadChildren: () =>
       import('./producto/producto.module').then((m) => m.ProductoPageModule),
+  },
+  {
+    path: 'inicio',
+    loadChildren: () =>
+      import('./inicio/inicio.module').then((m) => m.InicioPageModule),
   },
 ];
 

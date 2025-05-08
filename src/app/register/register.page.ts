@@ -4,8 +4,6 @@ import { IonicModule, NavController, ToastController } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 
-
-
 @Component({
   selector: 'app-register',
   standalone: true,

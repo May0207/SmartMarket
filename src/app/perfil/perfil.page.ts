@@ -16,29 +16,4 @@ export class PerfilPage {
   constructor() {}
 
   ngOnInit() {}
-
-  // Navegación
-  goToHome() {
-    console.log('Ir a Inicio');
-  }
-
-  goToFavorites() {
-    console.log('Ir a Favoritos');
-  }
-
-  goToProfile() {
-    console.log('Ir a Perfil');
-  }
-
-  goToSettings() {
-    console.log('Ir a Configuración');
-  }
-
-  logout() {
-    console.log('Cerrar Sesión');
-  }
-
-  irAFavoritos() {
-    console.log('Ir a Favoritos');
-  }
 }

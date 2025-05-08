@@ -1,44 +1,42 @@
 <ion-content>
   <!-- Contenedor General -->
   <div class="main-container">
-
-    <!-- Barra Lateral -->
-    <!-- Barra Lateral -->
-    <aside class="sidebar">
-      <div class="sidebar-top">
-        <img src="assets/lLogo.png" alt="Logo" class="sidebar-icon logo" (click)="goToHome()">
-        <ion-icon name="star" class="sidebar-icon favoritos" (click)="irAFavoritos()"></ion-icon>
-        <ion-icon name="person" class="sidebar-icon profile" (click)="goToProfile()"></ion-icon>
-        <ion-icon name="settings" class="sidebar-icon settings" (click)="goToSettings()"></ion-icon>
-      </div>
-      <div class="sidebar-bottom">
-        <ion-icon name="log-out" class="sidebar-icon sign-out" (click)="logout()"></ion-icon>
-      </div>
-    </aside>
-
-
     <!-- Contenido Principal -->
     <div class="content-area">
       <!-- Botón de Cerrar -->
-      <ion-icon name="close" class="close-button" (click)="cerrarPagina()"></ion-icon>
+      <ion-icon
+        name="close"
+        class="close-button"
+        (click)="cerrarPagina()"
+      ></ion-icon>
 
       <!-- Sección Izquierda: Imagen del Producto y Tienda -->
       <!-- Sección Izquierda: Imagen del Producto y Tienda -->
-        <div class="left-section">
-          <h2 class="product-name">{{ producto.nombre }}</h2>
-          <img [src]="producto.imagen" alt="Imagen del producto" class="product-image" />
+      <div class="left-section">
+        <h2 class="product-name">{{ producto.nombre }}</h2>
+        <img
+          [src]="producto.imagen"
+          alt="Imagen del producto"
+          class="product-image"
+        />
 
-          <div class="store-info">
-            <img [src]="producto.supermercadoLogo" alt="Logo supermercado" class="store-logo" />
-            <div class="product-details">
-              <h3>{{ producto.supermercado }}</h3>
-              <p>Precio: {{ producto.precio }}€</p>
-              <p>Precio por unidad: {{ producto.precioUnidad }}/ Unidad</p>
-            </div>
+        <div class="store-info">
+          <img
+            [src]="producto.supermercadoLogo"
+            alt="Logo supermercado"
+            class="store-logo"
+          />
+          <div class="product-details">
+            <h3>{{ producto.supermercado }}</h3>
+            <p>Precio: {{ producto.precio }}€</p>
+            <p>Precio por unidad: {{ producto.precioUnidad }}/ Unidad</p>
           </div>
-
-          <ion-button class="buy-button" expand="full">Comprar este producto</ion-button>
         </div>
+
+        <ion-button class="buy-button" expand="full"
+          >Comprar este producto</ion-button
+        >
+      </div>
 
       <!-- Sección Derecha: Gráficas -->
       <div class="right-section">

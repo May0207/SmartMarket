@@ -1,0 +1,102 @@
+.home-page {
+  --background: transparent;
+  position: relative;
+}
+
+.background-carousel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.5);
+}
+
+.welcome-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 20px;
+}
+
+.welcome-card {
+  width: 100%;
+  max-width: 700px;
+  text-align: center;
+  background-color: white !important;
+  color: black !important;
+}
+
+.welcome-card {
+  width: 100%;
+  max-width: 700px;
+  min-height: 500px; // o el valor que necesites
+  text-align: center;
+  background-color: white !important;
+  color: black !important;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-button {
+  --background: #6f4ff2; // Morado principal
+  --background-activated: #5c3de0; // Al presionar
+  --border-radius: 12px;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  padding: 12px 24px;
+  display: block;
+  margin: 20px auto 0 auto;
+  text-align: center;
+  box-shadow: none;
+}
+
+.contact-button {
+  --border-radius: 12px;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  padding: 12px 24px;
+  display: block;
+  margin: 20px auto 0 auto;
+  text-align: center;
+  box-shadow: none;
+}
+
+.producto-button {
+  --background: #00bd90;
+  --background-activated: #01dfab; // Al presionar
+  --border-radius: 12px;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  padding: 12px 24px;
+  display: block;
+  margin: 20px auto 0 auto;
+  text-align: center;
+  box-shadow: none;
+}
+
+.welcome-title {
+  width: 100%;
+  max-width: 700px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.description {
+  margin-bottom: 1%;
+  margin-top: 1%;
+  font-size: 16px;
+}

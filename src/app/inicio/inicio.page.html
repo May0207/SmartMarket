@@ -1,0 +1,56 @@
+<ion-content fullscreen class="home-page">
+  <!-- Carrusel de fondo -->
+  <div class="background-carousel">
+    <img [src]="currentImage" alt="Fondo" class="background-image" />
+  </div>
+
+  <!-- Contenido principal centrado -->
+  <div class="welcome-container">
+    <ion-card class="welcome-card">
+      <ion-card-header>
+        <ion-card-title style="color: black" class="welcome-title">
+          ¡Bienvenido a SmartMarket!</ion-card-title
+        >
+      </ion-card-header>
+
+      <ion-card-content>
+        <p class="description">
+          Somos una plataforma que compara productos de supermercados para
+          ayudarte a ahorrar. Nuestro objetivo es brindarte una experiencia
+          simple, visual e informativa para que puedas encontrar los mejores
+          precios disponibles.
+        </p>
+
+        <p>
+          📊 Comparaciones claras&nbsp;&nbsp;&nbsp;🛒 Supermercados
+          actualizados&nbsp;&nbsp;&nbsp;💸 Ahorro asegurado
+        </p>
+        <ion-button
+          class="producto-button"
+          expand="block"
+          (click)="goToProductos()"
+        >
+          Comenzar a comparar
+        </ion-button>
+        <p class="description">¿No tienes cuenta?</p>
+        <p class="description">
+          Regístrate desde la ventana de inicio de sesión para guardar tus
+          productos favoritos.
+        </p>
+        <ion-button class="login-button" expand="block" (click)="goToLogin()">
+          Iniciar sesión
+        </ion-button>
+        <p class="description">¿Tienes alguna duda?</p>
+        <ion-button
+          class="contact-button"
+          expand="block"
+          fill="outline"
+          color="light"
+          (click)="contactar()"
+        >
+          ¡Contactanos!
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
