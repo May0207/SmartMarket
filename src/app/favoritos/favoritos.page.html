@@ -47,22 +47,25 @@
 
     <!-- Contenido Principal -->
     <div class="content-area">
-      <h1 class="page-title">Tus Productos Favoritos</h1>
 
+      <!-- SPINNER mientras se cargan los datos -->
+    <div *ngIf="loading" class="spinner-container">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Cargando favoritos...</p>
+    </div>
+      
+    <ng-container *ngIf="!loading">
+      <h1 class="page-title">Tus Productos Favoritos</h1>
+      
       <!-- Lista de productos favoritos -->
       <ion-grid class="product-grid">
+        
+
         <ion-row>
           <ion-col
             size="6"
             size-md="3"
             *ngFor="let producto of productosFiltrados">
-            
-            <ng-container *ngIf="productosFiltrados.length === 0">
-              <div class="no-favoritos">
-                <ion-icon name="sad-outline" size="large"></ion-icon>
-                <p>No tienes productos guardados en favoritos</p>
-              </div>
-            </ng-container>
             
             <ion-card
               class="product-card"
@@ -96,6 +99,14 @@
           </ion-col>
         </ion-row>
       </ion-grid>
+      <div *ngIf="productosFiltrados.length === 0" class="no-favoritos">
+        <ion-icon name="sad-outline" size="large"></ion-icon>
+        <p>No tienes productos guardados en favoritos</p>
+        <ion-button (click)="goToHome()" color="primary" class="buscar-btn">
+          Buscar productos
+        </ion-button>
+      </div>
+    </ng-container>      
     </div>
   </div>
 </ion-content>
