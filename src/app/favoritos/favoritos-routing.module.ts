@@ -5,7 +5,7 @@ import { FavoritosPage } from './favoritos.page';
 const routes: Routes = [
   {
     path: '',
-    component: FavoritosPage // 🔥 Ahora no usamos `loadChildren`
+    component: FavoritosPage 
   }
 ];
 

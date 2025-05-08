@@ -42,25 +42,6 @@
         class="custom-searchbar"
         placeholder="Buscar"
       ></ion-searchbar>
-
-      <!-- Botón de menú en lugar del avatar -->
-      <ion-button fill="clear" (click)="openPopover($event)">
-        <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
-      </ion-button>
-
-      <!-- Popover para mostrar opciones del usuario -->
-      <ion-popover
-        [isOpen]="isPopoverOpen"
-        [event]="popoverEvent"
-        (didDismiss)="isPopoverOpen = false"
-      >
-        <ng-template>
-          <ion-list>
-            <ion-item (click)="goToLogin()">Iniciar sesión</ion-item>
-            <ion-item (click)="goToRegister()">Registrarse</ion-item>
-          </ion-list>
-        </ng-template>
-      </ion-popover>
     </div>
 
     <!-- Contenido Principal -->
@@ -97,10 +78,11 @@
                 <ion-button
                   fill="clear"
                   color="danger"
-                  (click)="toggleFavorito(producto)"
+                  (click)="toggleFavorito(producto); $event.stopPropagation()"
                 >
                   <ion-icon name="heart"></ion-icon> Eliminar
-                </ion-button>
+              </ion-button>
+              
               </ion-card-content>
             </ion-card>
           </ion-col>

@@ -126,6 +126,103 @@ app.post("/register", async (req, res) => {
   }
 });
 
+// RUTA AÑADIR FAVORITOS
+app.post("/api/favoritos/add", async (req, res) => {
+  const { userId, productId } = req.body;
+
+  if (!userId || !productId) {
+    return res.status(400).json({ error: "Faltan datos obligatorios" });
+  }
+
+  try {
+    // Comprobamos si ya existe
+    const [exists] = await db.query(
+      "SELECT * FROM favoritos WHERE id_usuario = ? AND id_producto = ?",
+      [userId, productId]
+    );
+
+    if (exists.length > 0) {
+      return res.status(200).json({ message: "Ya está en favoritos" });
+    }
+
+    await db.query(
+      "INSERT INTO favoritos (id_usuario, id_producto) VALUES (?, ?)",
+      [userId, productId]
+    );
+
+    res.status(201).json({ message: "Añadido a favoritos" });
+  } catch (err) {
+    console.error("Error al añadir a favoritos:", err);
+    res.status(500).json({ error: "Error interno", message: err.message });
+  }
+});
+
+// RUTA VER FAVORITOS
+app.get("/api/favoritos/:userId", async (req, res) => {
+  const userId = parseInt(req.params.userId);
+
+  if (!userId) {
+    return res.status(400).json({ error: "ID de usuario no válido" });
+  }
+
+  try {
+    const [favoritos] = await db.query(`
+      SELECT 
+        p.id_producto AS id,
+        p.nombre,
+        s.nombre AS supermercado,
+        p.categoria,
+        p.subcategoria,
+        p.imagen,
+        p.url,
+        pr.precio,
+        pr.precio_por_unidad AS precioUnidad
+      FROM favoritos f
+      JOIN producto p ON f.id_producto = p.id_producto
+      LEFT JOIN (
+        SELECT pr1.*
+        FROM precio pr1
+        INNER JOIN (
+          SELECT id_producto, MAX(fecha_actualizacion) AS max_fecha
+          FROM precio
+          GROUP BY id_producto
+        ) pr2 ON pr1.id_producto = pr2.id_producto AND pr1.fecha_actualizacion = pr2.max_fecha
+      ) pr ON pr.id_producto = p.id_producto
+      LEFT JOIN supermercado s ON pr.id_supermercado = s.id_supermercado
+      WHERE f.id_usuario = ?
+    `, [userId]);
+
+    res.json(favoritos);
+  } catch (err) {
+    console.error("Error al obtener favoritos:", err);
+    res.status(500).json({ error: "Error interno" });
+  }
+});
+
+// RUTA BORRAR FAVORITO
+app.delete("/api/favoritos/:userId/:productId", async (req, res) => {
+  const { userId, productId } = req.params;
+
+  try {
+    const [result] = await db.query(
+      "DELETE FROM favoritos WHERE id_usuario = ? AND id_producto = ?",
+      [userId, productId]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "El producto no estaba en favoritos" });
+    }
+
+    res.json({ message: "Producto eliminado de favoritos" });
+  } catch (err) {
+    console.error("Error al eliminar favorito:", err);
+    res.status(500).json({ error: "Error interno" });
+  }
+});
+
+
+
+
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
@@ -165,3 +262,6 @@ app.post("/login", async (req, res) => {
     res.status(500).json({ error: "Error en el login", message: err.message });
   }
 });
+
+
+

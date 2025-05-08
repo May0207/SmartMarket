@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { FavoritesService } from '../../services/favorites.service';
+import { AuthService } from '../../services/auth.service';
+import { ToastController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-favoritos',
@@ -10,73 +14,65 @@ import { Router } from '@angular/router';
   templateUrl: './favoritos.page.html',
   styleUrls: ['./favoritos.page.scss'],
 })
-export class FavoritosPage {
-  product: any;
+export class FavoritosPage implements OnInit {
+  productosFavoritos: any[] = [];
 
-  constructor(private router: Router) {}
-  // Variables para controlar los dropdowns
-  showSupermarkets = false;
-  showPrice = false;
-  showNutrition = false;
-  isPopoverOpen = false;
-  popoverEvent: any;
+  popoverEvent: Event | null = null;
+  isPopoverOpen: boolean = false; 
 
-  productosFavoritos = [
-    {
-      id: 1,
-      nombre: 'Plátanos 800g',
-      supermercado: 'Carrefour',
-      precio: '2.50',
-      precioUnidad: '0.31',
-      imagen: 'assets/platanos.jpg',
-    },
-    {
-      id: 2,
-      nombre: 'Leche Entera 1L',
-      supermercado: 'Día',
-      precio: '1.20',
-      precioUnidad: '1.20',
-      imagen: 'assets/leche.jpg',
-    },
-    {
-      id: 3,
-      nombre: 'Pan Integral 500g',
-      supermercado: 'Hipercor',
-      precio: '2.00',
-      precioUnidad: '4.00',
-      imagen: 'assets/pan-integral.jpeg',
-    },
-    {
-      id: 4,
-      nombre: 'Plátanos 800g',
-      supermercado: 'Carrefour',
-      precio: '2.50',
-      precioUnidad: '0.31',
-      imagen: 'assets/platanos.jpg',
-    },
-    {
-      id: 5,
-      nombre: 'Leche Entera 1L',
-      supermercado: 'Día',
-      precio: '1.20',
-      precioUnidad: '1.20',
-      imagen: 'assets/leche.jpg',
-    },
-    {
-      id: 6,
-      nombre: 'Pan Integral 500g',
-      supermercado: 'Hipercor',
-      precio: '2.00',
-      precioUnidad: '4.00',
-      imagen: 'assets/pan-integral.jpeg',
-    },
-  ];
+  constructor(
+    private favoritesService: FavoritesService,
+    private authService: AuthService,
+    private router: Router,
+    private toastController: ToastController
+  ) {}
 
-  toggleFavorito(producto: any) {
-    this.productosFavoritos = this.productosFavoritos.filter(
-      (p) => p !== producto
-    );
+  
+  
+  ngOnInit() {
+    const user = this.authService.getCurrentUser();
+    if (!user) {
+      this.router.navigate(['/login']);
+      return;
+    }
+  
+    this.favoritesService.getFavorites(user.id_usuario).subscribe({
+      next: (data) => this.productosFavoritos = data,
+      error: (err) => {
+        console.error('Error cargando favoritos:', err);
+      }
+    });
   }
+  
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000,
+      position: 'bottom',
+      color: 'danger' // O 'success', según el tipo de mensaje
+    });
+    toast.present();
+  }
+  
+  toggleFavorito(producto: any) {
+    const user = this.authService.getCurrentUser();
+    if (!user) return;
+  
+    this.favoritesService.removeFavorite(user.id_usuario, producto.id).subscribe({
+      next: () => {
+        this.productosFavoritos = this.productosFavoritos.filter(p => p.id !== producto.id);
+        this.presentToast('Producto eliminado de favoritos');
+      },
+      error: (err) => {
+        console.error('Error al eliminar favorito:', err);
+        this.presentToast('Error al eliminar el producto');
+      }
+    });
+  }
+  
+  
+  
 
   goToProduct(producto: any) {
     console.log('Redirigiendo a producto:', producto.id);

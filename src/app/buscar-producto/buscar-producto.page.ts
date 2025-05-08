@@ -5,6 +5,11 @@ import { IonicModule, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
+import { ToastController } from '@ionic/angular';
+import { HttpErrorResponse } from '@angular/common/http';
+import { FavoritesService } from '../../services/favorites.service';
+
+
 
 interface Producto {
   id: number;
@@ -59,7 +64,9 @@ export class BuscarProductoPage implements OnInit {
     public authService: AuthService,
     private router: Router,
     private apiService: ApiService,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private toastController: ToastController,
+    private favoritesService: FavoritesService
   ) {}
 
   ngOnInit() {
@@ -156,10 +163,6 @@ export class BuscarProductoPage implements OnInit {
     this.router.navigate(['/producto', product.id]);
   }
 
-  addToFavorites(product: Producto) {
-    console.log(`Añadido ${product.name} a favoritos`);
-  }
-
   toggleDropdown(filter: string) {
     this.showSupermarkets = filter === 'supermarkets' ? !this.showSupermarkets : false;
     this.showPrice = filter === 'price' ? !this.showPrice : false;
@@ -253,4 +256,33 @@ export class BuscarProductoPage implements OnInit {
     this.showNutrition = false;
     this.loadProducts();
   }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000,
+      position: 'bottom'
+    });
+    await toast.present();
+  }
+
+  addToFavorites(product: any) {
+    const user = this.authService.getCurrentUser();
+    if (!user) {
+      this.presentToast('Debes iniciar sesión');
+      return;
+    }
+  
+    this.favoritesService.addFavorite(user.id_usuario, product).subscribe({
+      next: (res: any) => {
+        this.presentToast(res.message || 'Producto añadido');
+      },
+      error: (err: HttpErrorResponse) => {
+        console.error(err);
+        this.presentToast('Error al añadir a favoritos');
+      }      
+    });
+  }  
+  
+  
 }
