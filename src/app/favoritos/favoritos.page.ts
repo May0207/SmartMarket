@@ -8,8 +8,6 @@ import { ToastController } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
 
-
-
 @Component({
   selector: 'app-favoritos',
   standalone: true,
@@ -19,13 +17,13 @@ import { LoadingController } from '@ionic/angular';
 })
 export class FavoritosPage {
   searchTerm: string = '';
-  productosFiltrados: any[] = []; 
+  productosFiltrados: any[] = [];
   productosFavoritos: any[] = [];
 
   loading: boolean = true;
 
   popoverEvent: Event | null = null;
-  isPopoverOpen: boolean = false; 
+  isPopoverOpen: boolean = false;
 
   constructor(
     private favoritesService: FavoritesService,
@@ -41,9 +39,9 @@ export class FavoritosPage {
       this.router.navigate(['/login']);
       return;
     }
-  
+
     this.loading = true; // ✅ activar estado de carga
-  
+
     this.favoritesService.getFavorites(user.id_usuario).subscribe({
       next: (data) => {
         this.productosFavoritos = data;
@@ -54,52 +52,52 @@ export class FavoritosPage {
         console.error('Error cargando favoritos:', err);
         this.loading = false;
         this.presentToast('Error al cargar favoritos');
-      }
+      },
     });
   }
-  
-  
-  
+
   onSearchChange() {
     const term = this.searchTerm.toLowerCase();
-  
-    this.productosFiltrados = this.productosFavoritos.filter(p =>
-      p.nombre.toLowerCase().includes(term) ||
-      p.supermercado?.toLowerCase().includes(term)
+
+    this.productosFiltrados = this.productosFavoritos.filter(
+      (p) =>
+        p.nombre.toLowerCase().includes(term) ||
+        p.supermercado?.toLowerCase().includes(term)
     );
   }
-  
-  
 
   async presentToast(message: string) {
     const toast = await this.toastController.create({
       message,
       duration: 2000,
       position: 'bottom',
-      color: 'danger' // O 'success', según el tipo de mensaje
+      color: 'danger', // O 'success', según el tipo de mensaje
     });
     toast.present();
   }
-  
+
   toggleFavorito(producto: any) {
     const user = this.authService.getCurrentUser();
     if (!user) return;
-  
-    this.favoritesService.removeFavorite(user.id_usuario, producto.id).subscribe({
-      next: () => {
-        this.productosFavoritos = this.productosFavoritos.filter(p => p.id !== producto.id);
-        this.productosFiltrados = this.productosFiltrados.filter(p => p.id !== producto.id);
-        this.presentToast('Producto eliminado de favoritos');
-      },
-      error: (err) => {
-        console.error('Error al eliminar favorito:', err);
-        this.presentToast('Error al eliminar el producto');
-      }
-    });
+
+    this.favoritesService
+      .removeFavorite(user.id_usuario, producto.id)
+      .subscribe({
+        next: () => {
+          this.productosFavoritos = this.productosFavoritos.filter(
+            (p) => p.id !== producto.id
+          );
+          this.productosFiltrados = this.productosFiltrados.filter(
+            (p) => p.id !== producto.id
+          );
+          this.presentToast('Producto eliminado de favoritos');
+        },
+        error: (err) => {
+          console.error('Error al eliminar favorito:', err);
+          this.presentToast('Error al eliminar el producto');
+        },
+      });
   }
-  
-  
-  
 
   goToProduct(producto: any) {
     console.log('Redirigiendo a producto:', producto.id);
@@ -120,11 +118,8 @@ export class FavoritosPage {
     this.isPopoverOpen = true;
   }
 
-  goToLogin() {
-    this.router.navigate(['/login']);
-  }
-
-  goToRegister() {
-    this.router.navigate(['/register']);
+  goToProducto() {
+    this.isPopoverOpen = false;
+    setTimeout(() => this.router.navigate(['/buscar-producto']), 100);
   }
 }

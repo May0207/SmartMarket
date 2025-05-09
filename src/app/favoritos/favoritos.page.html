@@ -65,7 +65,11 @@
         <div *ngIf="productosFiltrados.length === 0" class="no-favoritos">
           <ion-icon name="sad-outline" size="large"></ion-icon>
           <p>No tienes productos guardados en favoritos</p>
-          <ion-button color="primary" class="buscar-btn">
+          <ion-button
+            (click)="goToProducto()"
+            color="primary"
+            class="buscar-btn"
+          >
             Buscar productos
           </ion-button>
         </div>

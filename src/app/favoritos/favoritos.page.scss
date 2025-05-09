@@ -1,5 +1,5 @@
 /* Fuente Poppins */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
 /* Cambiar el color de fondo de la página */
 ion-content {
@@ -11,81 +11,6 @@ ion-content {
 .main-container {
   display: flex;
   height: 100vh;
-}
-
-/* Barra lateral (fija) */
-.sidebar {
-  width: 60px;
-  background: #FFFFFF; /* Blanco */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start; /* Alinea los elementos al inicio */
-  padding-top: 20px; /* Espacio superior */
-  height: 100vh;
-  position: fixed; /* Fija la barra lateral */
-  left: 0;
-  top: 0;
-  z-index: 1000;
-}
-
-/* Contenedor superior del sidebar */
-.sidebar-top {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px; /* Espacio entre los íconos */
-}
-
-/* Contenedor inferior del sidebar */
-.sidebar-bottom {
-  margin-top: auto; /* Empuja el contenido hacia abajo */
-  margin-bottom: 20px; /* Margen inferior */
-}
-
-/* Estilos para los íconos del sidebar */
-.sidebar-icon {
-  cursor: pointer; /* Cambia el cursor al pasar sobre el ícono */
-  transition: opacity 0.2s ease; /* Efecto de transición al hacer hover */
-  color: #333; /* Color de los íconos */
-}
-
-.sidebar-icon:hover {
-  opacity: 0.8; /* Efecto de hover */
-}
-
-/* Logo */
-.sidebar-icon.logo {
-  color: #65646A;
-  font-size: 30px; /* Tamaño personalizado */
-  width: 30px; /* Tamaño personalizado */
-  height: 30px; /* Tamaño personalizado */
-}
-
-/* Favoritos, Perfil y Configuración */
-.sidebar-icon.favoritos {
-  margin-top: 50px; /* Mueve los íconos 50px hacia abajo */
-  color: #6F4FF2;
-  font-size: 22px; /* Tamaño personalizado */
-  width: 22px; /* Tamaño personalizado */
-  height: 22px; /* Tamaño personalizado */
-}
-
-.sidebar-icon.profile,
-.sidebar-icon.settings {
-  margin-top: 15px; /* Mueve los íconos 50px hacia abajo */
-  color: #65646A;
-  font-size: 22px; /* Tamaño personalizado */
-  width: 22px; /* Tamaño personalizado */
-  height: 22px; /* Tamaño personalizado */
-}
-
-/* Cerrar Sesión */
-.sidebar-icon.sign-out {
-  color: #65646A;
-  font-size: 22px; /* Tamaño personalizado */
-  width: 22px; /* Tamaño personalizado */
-  height: 22px; /* Tamaño personalizado */
 }
 
 /* Encabezado personalizado */
@@ -126,7 +51,7 @@ ion-content {
   margin-left: auto; /* Alinea a la derecha */
 }
 
-.product-img{
+.product-img {
   height: 150px;
 }
 
@@ -143,7 +68,7 @@ ion-content {
 
 /* Título "Productos" */
 .page-title {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 20px;
   font-weight: 600; /* Semibold */
   color: #333; /* Color del texto */
@@ -192,7 +117,6 @@ ion-content {
   }
 }
 
-
 /* Filtros */
 .filter-container {
   position: relative; /* Necesario para posicionar el contenido del filtro */
@@ -209,11 +133,11 @@ ion-content {
 /* Estilos para los botones de filtros */
 .filter-container ion-button {
   --border-radius: 22px; /* Bordes redondeados */
-  --background: #00BD90; /* Color de fondo */
+  --background: #00bd90; /* Color de fondo */
   --padding-start: 20px; /* Espaciado interno */
   --padding-end: 20px; /* Espaciado interno */
   --box-shadow: none; /* Sin sombra */
-  font-family: 'Poppins', sans-serif; /* Fuente Poppins */
+  font-family: "Poppins", sans-serif; /* Fuente Poppins */
   font-size: 14px; /* Tamaño del texto */
   font-weight: 500; /* Peso de la fuente */
   text-transform: none; /* Sin mayúsculas */
@@ -244,15 +168,15 @@ ion-content {
 
 /* Estilos para las casillas de verificación */
 .supermarket-checkbox {
-  --background-checked: #00BD90; /* Fondo verde cuando está seleccionado */
-  --border-color-checked: #00BD90; /* Borde verde cuando está seleccionado */
+  --background-checked: #00bd90; /* Fondo verde cuando está seleccionado */
+  --border-color-checked: #00bd90; /* Borde verde cuando está seleccionado */
   --checkmark-color: white; /* Color del tick */
   --size: 20px; /* Tamaño de la casilla */
 }
 
 /* Estilos para los textos de los supermercados */
 .supermarket-label {
-  font-family: 'Poppins', sans-serif; /* Fuente Poppins */
+  font-family: "Poppins", sans-serif; /* Fuente Poppins */
   font-size: 14px; /* Tamaño del texto */
   color: #848484; /* Color del texto */
   margin-left: 10px; /* Espacio entre la casilla y el texto */
@@ -261,7 +185,7 @@ ion-content {
 /* Estilos para el botón "Aplicar" */
 .apply-button {
   --border-radius: 22px; /* Bordes redondeados */
-  font-family: 'Poppins', sans-serif; /* Fuente Poppins */
+  font-family: "Poppins", sans-serif; /* Fuente Poppins */
   font-size: 14px; /* Tamaño del texto */
   font-weight: 500; /* Peso de la fuente */
   text-transform: none; /* Sin mayúsculas */
@@ -292,7 +216,7 @@ ion-content {
 }
 
 .product-grid::-webkit-scrollbar-thumb {
-  background: #6F4FF2; /* Color del thumb (barra) */
+  background: #6f4ff2; /* Color del thumb (barra) */
   border-radius: 4px; /* Bordes redondeados */
 }
 
@@ -314,7 +238,7 @@ ion-content {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding-top:15px;
+  padding-top: 15px;
   margin: 10px;
   box-shadow: none; /* Sin sombra */
 }
@@ -326,16 +250,16 @@ ion-card-content {
   justify-content: space-between; // Distribuye los elementos de manera uniforme
 }
 
-
 /* Estilos para el nombre del producto */
 .product-card h3 {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 18px;
   font-weight: 600; /* Semibold */
   margin: 10px 0;
 }
 
-h3, p {
+h3,
+p {
   margin: 0;
   padding: 0;
   min-height: 20px; // Asegura que todos los textos ocupen la misma altura mínima
@@ -343,7 +267,7 @@ h3, p {
 
 /* Estilos para el resto del texto */
 .product-card p {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 14px;
   margin: 5px 0;
 }
@@ -362,9 +286,9 @@ ion-button {
 }
 
 .favorite-button::part(native) {
-  background-color: #6F4FF2;
+  background-color: #6f4ff2;
   border-radius: 9px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 14px;
   color: white;
   margin-top: 15px;
@@ -379,7 +303,7 @@ ion-button {
 
 /* Estilos para el texto dentro del filtro de precio */
 .dropdown-overlay.price-dropdown ion-label {
-  font-family: 'Poppins', sans-serif; /* Fuente Poppins */
+  font-family: "Poppins", sans-serif; /* Fuente Poppins */
   font-size: 16px; /* Tamaño del texto más grande */
   color: #848484; /* Color del texto */
   margin-top: 10px; /* Espacio entre la barra y el texto */
@@ -387,9 +311,9 @@ ion-button {
 
 /* Estilos para la barra de rango (ion-range) dentro del filtro de precio */
 .dropdown-overlay.price-dropdown ion-range {
-  --bar-background: #00BD90; /* Color de fondo de la barra */
-  --bar-background-active: #00BD90; /* Color de fondo activo de la barra */
-  --knob-background: #00BD90; /* Color del knob (circulo) */
+  --bar-background: #00bd90; /* Color de fondo de la barra */
+  --bar-background-active: #00bd90; /* Color de fondo activo de la barra */
+  --knob-background: #00bd90; /* Color del knob (circulo) */
   --knob-size: 20px; /* Tamaño del knob */
   --bar-height: 6px; /* Altura de la barra */
   --bar-border-radius: 3px; /* Bordes redondeados de la barra */
@@ -405,7 +329,7 @@ ion-button {
 .nutrition-dropdown ion-button.nutrition-button::part(native) {
   background-color: white; /* Fondo blanco */
   color: #848484; /* Texto gris */
-  font-family: 'Poppins', sans-serif; /* Fuente Poppins */
+  font-family: "Poppins", sans-serif; /* Fuente Poppins */
   font-size: 14px; /* Tamaño del texto */
   font-weight: 500; /* Peso de la fuente */
   text-transform: none; /* Sin mayúsculas */
@@ -423,7 +347,7 @@ ion-button {
 }
 /* Estilos para el texto del precio por unidad */
 .product-card p.precio-por-unidad {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 14px;
   color: #666; /* Color gris para diferenciarlo */
   margin: 5px 0; /* Espaciado */
