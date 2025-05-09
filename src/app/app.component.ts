@@ -9,7 +9,7 @@ import { IonicModule, AlertController } from '@ionic/angular';
   standalone: false,
 })
 export class AppComponent {
-  mostrarSidebar = true;
+  mostrarSidebar = false;
   isLoggedIn = false;
   rol: string | null = null;
   isPopoverOpen = false;
@@ -23,6 +23,7 @@ export class AppComponent {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const rutasSinSidebar = ['/inicio', '/login', '/register'];
+        const currentUrl = this.router.url;
         this.mostrarSidebar = !rutasSinSidebar.includes(event.url);
 
         // Estado del usuario
@@ -63,8 +64,7 @@ export class AppComponent {
   }
 
   goToSettings() {
-    // Agrega tu ruta de configuración si la tienes
-    this.router.navigate(['/configuracion']);
+    this.router.navigate(['/config']);
   }
 
   confirmLogout() {
@@ -82,7 +82,13 @@ export class AppComponent {
             handler: () => {
               this.auth.logout();
               this.isPopoverOpen = false;
-              // Simplemente actualiza la vista, sin redirigir
+
+              // 🔄 Fuerza actualización del estado
+              this.isLoggedIn = this.auth.isLoggedIn();
+              this.rol = this.auth.getUserRole();
+
+              //Opcional: redirige al inicio
+              //this.router.navigate(['/inicio']);
             },
           },
         ],

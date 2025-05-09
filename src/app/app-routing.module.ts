@@ -43,7 +43,11 @@ const routes: Routes = [
     path: 'inicio',
     loadChildren: () =>
       import('./inicio/inicio.module').then((m) => m.InicioPageModule),
+  },  {
+    path: 'config',
+    loadChildren: () => import('./config/config.module').then( m => m.ConfigPageModule)
   },
+
 ];
 
 @NgModule({

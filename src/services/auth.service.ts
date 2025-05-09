@@ -68,4 +68,7 @@ export class AuthService {
     this.currentUser = user;
     localStorage.setItem('user', JSON.stringify(user));
   }
+  updateUser(id: number, updatedData: any) {
+    return this.http.put(`${this.apiUrl}/usuarios/${id}`, updatedData);
+  }
 }

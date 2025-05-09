@@ -35,13 +35,17 @@ export class PerfilPage {
   }
 
   guardarCambios() {
-    console.log('Datos actualizados:', this.usuario);
+    const userId = this.usuario.id_usuario;
 
-    // Simula guardado (aquí iría llamada a backend si lo tienes)
-    localStorage.setItem('user', JSON.stringify(this.usuario));
-    this.authService.setCurrentUser(this.usuario);
-
-    this.presentToast('Cambios guardados correctamente');
+    this.authService.updateUser(userId, this.usuario).subscribe({
+      next: () => {
+        this.authService.setCurrentUser(this.usuario);
+        this.presentToast('Cambios guardados correctamente');
+      },
+      error: () => {
+        this.presentToast('Error al guardar los cambios');
+      },
+    });
   }
 
   async presentToast(message: string) {

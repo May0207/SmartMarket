@@ -22,13 +22,19 @@ app.get("/api/productos", async (req, res) => {
     const offset = parseInt(req.query.offset) || 0;
     const precioMax = parseFloat(req.query.precioMax) || 100000;
     const supermercados = req.query.super || [];
-    const searchTerm = req.query.search || '';
+    const searchTerm = req.query.search || "";
     const nutritionField = req.query.nutritionField;
     const nutritionOrder = req.query.nutritionOrder;
 
-    const validFields = ['calorias', 'proteinas', 'grasas', 'hidratos_carbono', 'azucares'];
+    const validFields = [
+      "calorias",
+      "proteinas",
+      "grasas",
+      "hidratos_carbono",
+      "azucares",
+    ];
 
-    let orderBy = 'ORDER BY p.id_producto ASC';
+    let orderBy = "ORDER BY p.id_producto ASC";
     if (nutritionField && validFields.includes(nutritionField)) {
       orderBy = `
         ORDER BY 
@@ -36,7 +42,7 @@ app.get("/api/productos", async (req, res) => {
             WHEN ${nutritionField} IS NULL OR ${nutritionField} = 0 THEN 1 
             ELSE 0 
           END ASC,
-          ${nutritionField} ${nutritionOrder === 'asc' ? 'ASC' : 'DESC'}
+          ${nutritionField} ${nutritionOrder === "asc" ? "ASC" : "DESC"}
       `;
     }
 
@@ -108,21 +114,28 @@ app.post("/register", async (req, res) => {
   const { nombre, apellido1, apellido2, email, password, birthdate } = req.body;
 
   try {
-    const [existing] = await db.query("SELECT * FROM usuario WHERE email = ?", [email]);
+    const [existing] = await db.query("SELECT * FROM usuario WHERE email = ?", [
+      email,
+    ]);
     if (existing.length > 0) {
       return res.status(400).json({ error: "El correo ya está registrado" });
     }
 
     const hashed = await bcrypt.hash(password, 10);
-    await db.query(`
+    await db.query(
+      `
       INSERT INTO usuario (nombre, apellido1, apellido2, email, pass, rol, fecha_creacion)
       VALUES (?, ?, ?, ?, ?, 'cliente', ?)
-    `, [nombre, apellido1, apellido2, email, hashed, birthdate]);
+    `,
+      [nombre, apellido1, apellido2, email, hashed, birthdate]
+    );
 
     res.status(201).json({ message: "Registro exitoso" });
   } catch (err) {
     console.error("Error en /register:", err);
-    res.status(500).json({ error: "Error en el registro", message: err.message });
+    res
+      .status(500)
+      .json({ error: "Error en el registro", message: err.message });
   }
 });
 
@@ -166,7 +179,8 @@ app.get("/api/favoritos/:userId", async (req, res) => {
   }
 
   try {
-    const [favoritos] = await db.query(`
+    const [favoritos] = await db.query(
+      `
       SELECT 
         p.id_producto AS id,
         p.nombre,
@@ -190,7 +204,9 @@ app.get("/api/favoritos/:userId", async (req, res) => {
       ) pr ON pr.id_producto = p.id_producto
       LEFT JOIN supermercado s ON pr.id_supermercado = s.id_supermercado
       WHERE f.id_usuario = ?
-    `, [userId]);
+    `,
+      [userId]
+    );
 
     res.json(favoritos);
   } catch (err) {
@@ -210,7 +226,9 @@ app.delete("/api/favoritos/:userId/:productId", async (req, res) => {
     );
 
     if (result.affectedRows === 0) {
-      return res.status(404).json({ message: "El producto no estaba en favoritos" });
+      return res
+        .status(404)
+        .json({ message: "El producto no estaba en favoritos" });
     }
 
     res.json({ message: "Producto eliminado de favoritos" });
@@ -220,8 +238,97 @@ app.delete("/api/favoritos/:userId/:productId", async (req, res) => {
   }
 });
 
+app.put("/usuarios/:id", async (req, res) => {
+  const id = req.params.id;
+  const { nombre, apellido1, apellido2, email, password } = req.body;
 
+  try {
+    // Preparamos la consulta SQL dinámicamente
+    let sql = `
+      UPDATE usuario
+      SET nombre = ?, apellido1 = ?, apellido2 = ?, email = ?
+    `;
+    const values = [nombre, apellido1, apellido2, email];
 
+    // Si hay contraseña, la hasheamos y la incluimos
+    if (password && password.trim() !== "") {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      sql += `, pass = ?`;
+      values.push(hashedPassword);
+    }
+
+    sql += ` WHERE id_usuario = ?`;
+    values.push(id);
+
+    // Ejecutamos la consulta
+    const [result] = await db.query(sql, values);
+
+    res.json({ message: "Usuario actualizado correctamente" });
+  } catch (err) {
+    console.error("Error al actualizar usuario:", err);
+    res.status(500).json({
+      error: "Error al actualizar usuario",
+      message: err.message,
+    });
+  }
+});
+
+app.get("/usuarios", async (req, res) => {
+  try {
+    const [users] = await db.query(
+      "SELECT id_usuario, nombre, apellido1, apellido2, email, rol FROM usuario"
+    );
+    res.json(users);
+  } catch (err) {
+    console.error("Error al obtener usuarios:", err);
+    res.status(500).json({ error: "Error al obtener usuarios" });
+  }
+});
+
+app.put("/usuarios/:id/rol", async (req, res) => {
+  const id = req.params.id;
+  const { rol } = req.body;
+
+  try {
+    const [result] = await db.query(
+      "UPDATE usuario SET rol = ? WHERE id_usuario = ?",
+      [rol, id]
+    );
+
+    res.json({ message: "Rol actualizado correctamente" });
+  } catch (err) {
+    console.error("Error al actualizar rol:", err);
+    res
+      .status(500)
+      .json({ error: "Error al actualizar rol", detail: err.message });
+  }
+});
+
+app.delete("/usuarios/:id", async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    // Primero elimina los favoritos
+    await db.query("DELETE FROM favoritos WHERE id_usuario = ?", [id]);
+
+    // Luego elimina el usuario
+    const [result] = await db.query(
+      "DELETE FROM usuario WHERE id_usuario = ?",
+      [id]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
+    res.json({ message: "Usuario y sus favoritos eliminados correctamente" });
+  } catch (err) {
+    console.error("Error al eliminar usuario:", err);
+    res
+      .status(500)
+      .json({ error: "Error al eliminar usuario", detail: err.message });
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
@@ -232,7 +339,9 @@ app.post("/login", async (req, res) => {
 
   try {
     // Verificamos si el usuario existe
-    const [users] = await db.query("SELECT * FROM usuario WHERE email = ?", [email]);
+    const [users] = await db.query("SELECT * FROM usuario WHERE email = ?", [
+      email,
+    ]);
 
     if (users.length === 0) {
       return res.status(401).json({ error: "Usuario no encontrado" });
@@ -254,14 +363,11 @@ app.post("/login", async (req, res) => {
         id_usuario: user.id_usuario,
         nombre: user.nombre,
         email: user.email,
-        rol: user.rol
-      }
+        rol: user.rol,
+      },
     });
   } catch (err) {
     console.error("Error en /login:", err);
     res.status(500).json({ error: "Error en el login", message: err.message });
   }
 });
-
-
-

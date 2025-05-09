@@ -33,8 +33,7 @@
 
       <!-- Solo si es admin -->
       <ion-icon
-        *ngIf="isLoggedIn"
-        &&="rol === 'admin'"
+        *ngIf="isLoggedIn && rol === 'admin'"
         name="settings"
         class="sidebar-icon settings"
         (click)="goToSettings()"
