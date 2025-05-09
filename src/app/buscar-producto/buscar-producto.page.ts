@@ -34,7 +34,7 @@ interface Producto {
   standalone: true,
   imports: [CommonModule, FormsModule, IonicModule],
 })
-export class BuscarProductoPage implements OnInit {
+export class BuscarProductoPage{
   products: Producto[] = [];
   favoritosIds: number[] = [];
   loading = false;
@@ -68,18 +68,21 @@ export class BuscarProductoPage implements OnInit {
     private favoritesService: FavoritesService
   ) {}
 
-  ngOnInit() {
-    this.loadProducts();
+  ionViewWillEnter() {
+    this.loadProducts(); // 👈 sigue cargando los productos
+  
     const user = this.authService.getCurrentUser();
     if (user) {
       this.favoritesService.getFavorites(user.id_usuario).subscribe({
         next: (data) => {
-          this.favoritosIds = data.map((p) => p.id); // guarda solo los IDs
+          this.favoritosIds = data.map((p) => p.id);
         },
         error: (err) => console.error('Error cargando favoritos:', err),
       });
+    } else {
+      this.favoritosIds = []; // vaciar por si no hay sesión
     }
-  }
+  }  
 
   loadPage(page: number) {
     this.offset = (page - 1) * this.limit;
@@ -139,6 +142,7 @@ export class BuscarProductoPage implements OnInit {
             text: 'Cerrar sesión',
             handler: () => {
               this.authService.logout();
+              this.favoritosIds = [];
               this.isPopoverOpen = false;
               // Simplemente actualiza la vista, sin redirigir
             },
