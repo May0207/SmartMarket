@@ -10,38 +10,56 @@
         </ion-card-header>
 
         <ion-card-content>
-          <!-- Campos del formulario -->
-          <ion-item>
-            <ion-label position="stacked">Nombre</ion-label>
-            <ion-input placeholder="Tu nombre"></ion-input>
-          </ion-item>
+          <form (ngSubmit)="guardarCambios()" #perfilForm="ngForm">
+            <ion-item>
+              <ion-label position="stacked">Nombre</ion-label>
+              <ion-input
+                [(ngModel)]="usuario.nombre"
+                name="nombre"
+                required
+              ></ion-input>
+            </ion-item>
 
-          <ion-item>
-            <ion-label position="stacked">Primer apellido</ion-label>
-            <ion-input placeholder="Tu 1Apellido"></ion-input>
-          </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Primer apellido</ion-label>
+              <ion-input
+                [(ngModel)]="usuario.apellido1"
+                name="apellido1"
+                required
+              ></ion-input>
+            </ion-item>
 
-          <ion-item>
-            <ion-label position="stacked">Segundo apellido</ion-label>
-            <ion-input placeholder="Tu 2Apellido"></ion-input>
-          </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Segundo apellido</ion-label>
+              <ion-input
+                [(ngModel)]="usuario.apellido2"
+                name="apellido2"
+              ></ion-input>
+            </ion-item>
 
-          <ion-item>
-            <ion-label position="stacked">Email</ion-label>
-            <ion-input
-              type="email"
-              placeholder="Correo electrónico"
-            ></ion-input>
-          </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Email</ion-label>
+              <ion-input
+                type="email"
+                [(ngModel)]="usuario.email"
+                name="email"
+                required
+              ></ion-input>
+            </ion-item>
 
-          <ion-item>
-            <ion-label position="stacked">Contraseña</ion-label>
-            <ion-input type="password" placeholder="Contraseña"></ion-input>
-          </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Contraseña</ion-label>
+              <ion-input
+                type="password"
+                [(ngModel)]="usuario.password"
+                name="password"
+              ></ion-input>
+            </ion-item>
+            <ion-button type="submit" class="modificar-button"
+              >Guardar</ion-button
+            >
+          </form>
         </ion-card-content>
-
-        <!-- Botón de guardar -->
-        <ion-button class="modificar-button">Guardar</ion-button>
       </ion-card>
     </div>
   </div>

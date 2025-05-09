@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, FormsModule]
+  imports: [CommonModule, IonicModule, FormsModule],
 })
 export class LoginPage {
   email: string = '';
@@ -19,13 +19,13 @@ export class LoginPage {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private toastCtrl: ToastController // 👈 Necesario para mostrar errores
+    private toastCtrl: ToastController
   ) {}
 
   async login() {
     try {
       await this.authService.login(this.email, this.password);
-      this.router.navigate(['/buscar-producto']); // ✅ Redirección correcta
+      this.router.navigate(['/buscar-producto']);
     } catch (error) {
       console.error('Error en login:', error);
       const toast = await this.toastCtrl.create({

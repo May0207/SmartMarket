@@ -64,4 +64,8 @@ export class AuthService {
     const user = this.getCurrentUser();
     return user?.rol || null;
   }
+  setCurrentUser(user: any) {
+    this.currentUser = user;
+    localStorage.setItem('user', JSON.stringify(user));
+  }
 }
