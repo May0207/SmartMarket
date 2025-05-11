@@ -1,59 +1,60 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AlertController } from '@ionic/angular';
-import { LoginPage } from './login/login.page';
-import { FavoritosPage } from './favoritos/favoritos.page';
-import { ProductoPage } from './producto/producto.page';
-import { PerfilPage } from './perfil/perfil.page';
+import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-
+  {
+    path: '',
+    redirectTo: 'inicio',
+    pathMatch: 'full',
+  },
+  {
+    path: 'inicio',
+    loadComponent: () =>
+      import('./inicio/inicio.page').then((m) => m.InicioPage),
+  },
   {
     path: 'login',
-    loadComponent: () => import('./login/login.page').then((m) => m.LoginPage),
+    loadComponent: () =>
+      import('./login/login.page').then((m) => m.LoginPage),
   },
   {
     path: 'register',
     loadComponent: () =>
       import('./register/register.page').then((m) => m.RegisterPage),
   },
-
   {
     path: 'buscar-producto',
-    loadChildren: () =>
-      import('./buscar-producto/buscar-producto.module').then(
-        (m) => m.BuscarProductoPageModule
-      ),
+    loadComponent: () =>
+      import('./buscar-producto/buscar-producto.page').then((m) => m.BuscarProductoPage),
   },
   {
-    path: 'favoritos',
-    component: FavoritosPage,
+    path: 'producto/:id',
+    loadComponent: () =>
+      import('./producto/producto.page').then((m) => m.ProductoPage),
   },
   {
     path: 'perfil',
-    component: PerfilPage,
+    loadComponent: () =>
+      import('./perfil/perfil.page').then((m) => m.PerfilPage),
   },
   {
-    path: 'producto',
-    loadChildren: () =>
-      import('./producto/producto.module').then((m) => m.ProductoPageModule),
+    path: 'favoritos',
+    loadComponent: () =>
+      import('./favoritos/favoritos.page').then((m) => m.FavoritosPage),
   },
   {
-    path: 'inicio',
-    loadChildren: () =>
-      import('./inicio/inicio.module').then((m) => m.InicioPageModule),
-  },  {
     path: 'config',
-    loadChildren: () => import('./config/config.module').then( m => m.ConfigPageModule)
+    loadComponent: () =>
+      import('./config/config.page').then((m) => m.ConfigPage),
   },
-
+  {
+    path: '**',
+    redirectTo: 'inicio'
+  }
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
-  ],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

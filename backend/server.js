@@ -371,3 +371,60 @@ app.post("/login", async (req, res) => {
     res.status(500).json({ error: "Error en el login", message: err.message });
   }
 });
+app.get("/api/productos/:id", async (req, res) => {
+  const id = parseInt(req.params.id);
+
+  if (!id) {
+    return res.status(400).json({ error: "ID inválido" });
+  }
+
+  try {
+    const query = `
+      SELECT 
+        p.id_producto AS id,
+        p.nombre AS nombre,
+        s.nombre AS supermercado,
+        p.categoria,
+        p.subcategoria,
+        p.imagen,
+        p.url,
+        pr.precio,
+        pr.precio_por_unidad AS precioUnidad,
+       CAST(TRIM(SUBSTRING_INDEX(n.valor_energetico, '/', 1)) AS UNSIGNED) AS calorias,
+
+  CAST(REPLACE(n.proteinas, ',', '.') AS DECIMAL(10,2)) AS proteinas,
+CAST(REPLACE(n.hidratos_carbono, ',', '.') AS DECIMAL(10,2)) AS hidratos_carbono,
+CAST(REPLACE(n.grasas, ',', '.') AS DECIMAL(10,2)) AS grasas,
+CAST(REPLACE(n.azucares, ',', '.') AS DECIMAL(10,2)) AS azucares
+
+      FROM producto p
+      LEFT JOIN (
+        SELECT pr1.*
+        FROM precio pr1
+        INNER JOIN (
+          SELECT id_producto, MAX(fecha_actualizacion) AS max_fecha
+          FROM precio
+          GROUP BY id_producto
+        ) pr2 ON pr1.id_producto = pr2.id_producto AND pr1.fecha_actualizacion = pr2.max_fecha
+      ) pr ON pr.id_producto = p.id_producto
+      LEFT JOIN supermercado s ON s.id_supermercado = pr.id_supermercado
+      LEFT JOIN nutricion n ON n.id_producto = p.id_producto
+      WHERE p.id_producto = ?
+      LIMIT 1
+    `;
+
+    const [results] = await db.query(query, [id]);
+
+    if (results.length === 0) {
+      return res.status(404).json({ error: "Producto no encontrado" });
+    }
+
+    res.json(results[0]);
+  } catch (err) {
+    console.error("Error en /api/productos/:id:", err);
+    res.status(500).json({
+      error: "Error interno",
+      detail: err.message,
+    });
+  }
+});

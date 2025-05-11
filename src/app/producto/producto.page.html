@@ -11,7 +11,6 @@
       ></ion-icon>
 
       <!-- Sección Izquierda: Imagen del Producto y Tienda -->
-      <!-- Sección Izquierda: Imagen del Producto y Tienda -->
       <div class="left-section">
         <h2 class="product-name">{{ producto.nombre }}</h2>
         <img
@@ -22,7 +21,7 @@
 
         <div class="store-info">
           <img
-            [src]="producto.supermercadoLogo"
+            [src]="supermercadoLogo"
             alt="Logo supermercado"
             class="store-logo"
           />
@@ -33,20 +32,61 @@
           </div>
         </div>
 
-        <ion-button class="buy-button" expand="full"
-          >Comprar este producto</ion-button
-        >
+        <!-- Calorías -->
+        <div class="calories-badge" *ngIf="producto.calorias > 0">
+          <strong>Calorías:</strong> {{ producto.calorias }} kcal
+        </div>
+
+        <!-- Botones: Comprar + Favoritos -->
+        <div class="button-row" *ngIf="producto.url; else noDisponible">
+          <a
+            [href]="producto.url"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <ion-button class="buy-button" expand="block">
+              COMPRAR ESTE PRODUCTO
+            </ion-button>
+          </a>
+
+          <ion-button
+            color="danger"
+            expand="block"
+            (click)="anadirAFavoritos()"
+            *ngIf="userId && !esFavorito"
+          >
+            ❤️ Añadir a favoritos
+          </ion-button>
+
+          <ion-button
+            color="medium"
+            expand="block"
+            disabled
+            *ngIf="userId && esFavorito"
+          >
+            ❤️ En favoritos
+          </ion-button>
+        </div>
+
+        <ng-template #noDisponible>
+          <div class="no-link-warning">
+            Este producto no está disponible para comprar online.
+          </div>
+        </ng-template>
       </div>
 
       <!-- Sección Derecha: Gráficas -->
       <div class="right-section">
+        <!-- Gráfica Nutricional -->
         <div class="chart-container small-chart">
           <h3>Por 100g</h3>
-          <canvas id="nutritionalChart"></canvas>
+          <canvas #nutritionalChart></canvas>
         </div>
+
+        <!-- Gráfica Precio -->
         <div class="chart-container">
           <h3>Precio</h3>
-          <canvas id="priceChart"></canvas>
+          <canvas #priceChart></canvas>
         </div>
       </div>
     </div>
