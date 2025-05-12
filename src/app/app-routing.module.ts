@@ -34,8 +34,8 @@ const routes: Routes = [
   },
   {
     path: 'perfil',
-    loadComponent: () =>
-      import('./perfil/perfil.page').then((m) => m.PerfilPage),
+    loadChildren: () =>
+      import('./perfil/perfil.module').then((m) => m.PerfilPageModule)
   },
   {
     path: 'favoritos',

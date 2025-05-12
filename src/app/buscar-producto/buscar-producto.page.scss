@@ -133,6 +133,13 @@ ion-content {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   padding: 8px 0;
 }
+.auth-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-right: 8px;
+}
+
 
 //desplegable
 ::ng-deep .custom-popover ion-item {
