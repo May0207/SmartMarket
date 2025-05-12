@@ -1,66 +1,43 @@
 <ion-content>
-  <!-- Contenedor principal con layout de dos columnas -->
-  <div class="main-container">
-    <!-- Área de contenido principal -->
-    <div class="content-area">
-      <!-- Tarjeta de perfil de usuario -->
-      <ion-card class="perfil-card">
-        <ion-card-header>
-          <ion-card-title>Perfil de usuario</ion-card-title>
-        </ion-card-header>
+  <div class="perfil-wrapper">
+    <!-- Contenedor principal -->
+    <div class="perfil-card">
+      <!-- Cabecera con avatar -->
+      <div class="perfil-header">
+        <img src="assets/perfil-logueado.png" class="avatar" />
+        <h2>{{ usuario.nombre || 'Nombre Apellido' }}</h2>
+        <p>{{ usuario.email || 'correo@ejemplo.com' }}</p>
+      </div>
 
-        <ion-card-content>
-          <form (ngSubmit)="guardarCambios()" #perfilForm="ngForm">
-            <ion-item>
-              <ion-label position="stacked">Nombre</ion-label>
-              <ion-input
-                [(ngModel)]="usuario.nombre"
-                name="nombre"
-                required
-              ></ion-input>
-            </ion-item>
+      <!-- Formulario -->
+      <form (ngSubmit)="guardarCambios()" #perfilForm="ngForm" class="perfil-form">
+        <ion-item>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input [(ngModel)]="usuario.nombre" name="nombre"></ion-input>
+        </ion-item>
 
-            <ion-item>
-              <ion-label position="stacked">Primer apellido</ion-label>
-              <ion-input
-                [(ngModel)]="usuario.apellido1"
-                name="apellido1"
-                required
-              ></ion-input>
-            </ion-item>
+        <ion-item>
+          <ion-label position="floating">Apellido 1</ion-label>
+          <ion-input [(ngModel)]="usuario.apellido1" name="apellido1"></ion-input>
+        </ion-item>
 
-            <ion-item>
-              <ion-label position="stacked">Segundo apellido</ion-label>
-              <ion-input
-                [(ngModel)]="usuario.apellido2"
-                name="apellido2"
-              ></ion-input>
-            </ion-item>
+        <ion-item>
+          <ion-label position="floating">Apellido 2</ion-label>
+          <ion-input [(ngModel)]="usuario.apellido2" name="apellido2"></ion-input>
+        </ion-item>
 
-            <ion-item>
-              <ion-label position="stacked">Email</ion-label>
-              <ion-input
-                type="email"
-                [(ngModel)]="usuario.email"
-                name="email"
-                required
-              ></ion-input>
-            </ion-item>
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="email" [(ngModel)]="usuario.email" name="email"></ion-input>
+        </ion-item>
 
-            <ion-item>
-              <ion-label position="stacked">Contraseña</ion-label>
-              <ion-input
-                type="password"
-                [(ngModel)]="usuario.password"
-                name="password"
-              ></ion-input>
-            </ion-item>
-            <ion-button type="submit" class="modificar-button"
-              >Guardar</ion-button
-            >
-          </form>
-        </ion-card-content>
-      </ion-card>
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input type="password" [(ngModel)]="usuario.password" name="password"></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" type="submit" color="primary">Guardar cambios</ion-button>
+      </form>
     </div>
   </div>
 </ion-content>
