@@ -39,8 +39,8 @@ const routes: Routes = [
   },
   {
     path: 'favoritos',
-    loadComponent: () =>
-      import('./favoritos/favoritos.page').then((m) => m.FavoritosPage),
+    loadChildren: () =>
+      import('./favoritos/favoritos.module').then(m => m.FavoritosPageModule)
   },
   {
     path: 'config',

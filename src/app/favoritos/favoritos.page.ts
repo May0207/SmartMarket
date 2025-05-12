@@ -35,18 +35,18 @@ export class FavoritosPage {
 
   ionViewWillEnter() {
     const user = this.authService.getCurrentUser();
+
     if (!user) {
-      this.router.navigate(['/login']);
-      return;
+      return; 
     }
 
-    this.loading = true; // ✅ activar estado de carga
+    this.loading = true;
 
     this.favoritesService.getFavorites(user.id_usuario).subscribe({
       next: (data) => {
         this.productosFavoritos = data;
         this.productosFiltrados = data;
-        this.loading = false; // ✅ desactivar carga
+        this.loading = false;
       },
       error: (err) => {
         console.error('Error cargando favoritos:', err);
