@@ -5,6 +5,14 @@
 ion-content {
   --background: #f2f2f2; /* Nuevo color de fondo */
   --overflow: hidden; /* Oculta la barra de desplazamiento */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
 /* Contenedor general */
@@ -283,6 +291,8 @@ p {
 ion-button {
   align-self: center; // Centra el botón dentro de la tarjeta
   margin-top: auto; // Empuja el botón hacia abajo
+  margin-top: 16px;
+  width: 100%;
 }
 
 .favorite-button::part(native) {
@@ -356,4 +366,16 @@ ion-button {
 img {
   width: 100%; // Asegura que todas las imágenes ocupen el mismo ancho
   object-fit: contain; // Ajusta la imagen sin recortarla
+}
+
+/* Ajustes para hacer la página de favoritos responsive */
+.favoritos-card {
+  width: 90%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }

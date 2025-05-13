@@ -1,10 +1,18 @@
 /* Fuente Poppins */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
 /* Cambiar el color de fondo de la página */
 ion-content {
   --background: #f2f2f2; /* Nuevo color de fondo */
   --overflow: hidden; /* Oculta la barra de desplazamiento */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
 /* Contenedor general */
@@ -16,7 +24,7 @@ ion-content {
 /* Barra lateral (fija) */
 .sidebar {
   width: 60px;
-  background: #FFFFFF; /* Blanco */
+  background: #ffffff; /* Blanco */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,7 +64,7 @@ ion-content {
 
 /* Logo */
 .sidebar-icon.logo {
-  color: #65646A;
+  color: #65646a;
   font-size: 30px; /* Tamaño personalizado */
   width: 30px; /* Tamaño personalizado */
   height: 30px; /* Tamaño personalizado */
@@ -65,7 +73,7 @@ ion-content {
 /* Favoritos, Perfil y Configuración */
 .sidebar-icon.favoritos {
   margin-top: 50px; /* Mueve los íconos 50px hacia abajo */
-  color: #65646A;
+  color: #65646a;
   font-size: 22px; /* Tamaño personalizado */
   width: 22px; /* Tamaño personalizado */
   height: 22px; /* Tamaño personalizado */
@@ -74,7 +82,7 @@ ion-content {
 .sidebar-icon.profile,
 .sidebar-icon.settings {
   margin-top: 15px; /* Mueve los íconos 50px hacia abajo */
-  color: #65646A;
+  color: #65646a;
   font-size: 22px; /* Tamaño personalizado */
   width: 22px; /* Tamaño personalizado */
   height: 22px; /* Tamaño personalizado */
@@ -82,7 +90,7 @@ ion-content {
 
 /* Cerrar Sesión */
 .sidebar-icon.sign-out {
-  color: #65646A;
+  color: #65646a;
   font-size: 22px; /* Tamaño personalizado */
   width: 22px; /* Tamaño personalizado */
   height: 22px; /* Tamaño personalizado */
@@ -140,7 +148,6 @@ ion-content {
   margin-right: 8px;
 }
 
-
 //desplegable
 ::ng-deep .custom-popover ion-item {
   --background: transparent;
@@ -161,8 +168,6 @@ ion-content {
   padding: 0;
 }
 
-
-
 /* Contenedor del título "Productos" */
 .page-title-container {
   position: fixed; /* Fija el título */
@@ -176,7 +181,7 @@ ion-content {
 
 /* Título "Productos" */
 .page-title {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 20px;
   font-weight: 600; /* Semibold */
   color: #333; /* Color del texto */
@@ -219,11 +224,11 @@ ion-card {
 /* Estilos para los botones de filtros */
 .filter-container ion-button {
   --border-radius: 22px; /* Bordes redondeados */
-  --background: #00BD90; /* Color de fondo */
+  --background: #00bd90; /* Color de fondo */
   --padding-start: 20px; /* Espaciado interno */
   --padding-end: 20px; /* Espaciado interno */
   --box-shadow: none; /* Sin sombra */
-  font-family: 'Poppins', sans-serif; /* Fuente Poppins */
+  font-family: "Poppins", sans-serif; /* Fuente Poppins */
   font-size: 14px; /* Tamaño del texto */
   font-weight: 500; /* Peso de la fuente */
   text-transform: none; /* Sin mayúsculas */
@@ -254,15 +259,15 @@ ion-card {
 
 /* Estilos para las casillas de verificación */
 .supermarket-checkbox {
-  --background-checked: #00BD90; /* Fondo verde cuando está seleccionado */
-  --border-color-checked: #00BD90; /* Borde verde cuando está seleccionado */
+  --background-checked: #00bd90; /* Fondo verde cuando está seleccionado */
+  --border-color-checked: #00bd90; /* Borde verde cuando está seleccionado */
   --checkmark-color: white; /* Color del tick */
   --size: 20px; /* Tamaño de la casilla */
 }
 
 /* Estilos para los textos de los supermercados */
 .supermarket-label {
-  font-family: 'Poppins', sans-serif; /* Fuente Poppins */
+  font-family: "Poppins", sans-serif; /* Fuente Poppins */
   font-size: 14px; /* Tamaño del texto */
   color: #848484; /* Color del texto */
   margin-left: 10px; /* Espacio entre la casilla y el texto */
@@ -271,7 +276,7 @@ ion-card {
 /* Estilos para el botón "Aplicar" */
 .apply-button {
   --border-radius: 22px; /* Bordes redondeados */
-  font-family: 'Poppins', sans-serif; /* Fuente Poppins */
+  font-family: "Poppins", sans-serif; /* Fuente Poppins */
   font-size: 14px; /* Tamaño del texto */
   font-weight: 500; /* Peso de la fuente */
   text-transform: none; /* Sin mayúsculas */
@@ -302,7 +307,7 @@ ion-card {
 }
 
 .product-grid::-webkit-scrollbar-thumb {
-  background: #6F4FF2; /* Color del thumb (barra) */
+  background: #6f4ff2; /* Color del thumb (barra) */
   border-radius: 4px; /* Bordes redondeados */
 }
 
@@ -327,7 +332,7 @@ ion-card {
 
 /* Estilos para el nombre del producto */
 .product-card h3 {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 18px;
   font-weight: 600;
   margin: 10px 0;
@@ -341,7 +346,7 @@ ion-card {
 
 /* Estilos para el resto del texto */
 .product-card p {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 14px;
   margin: 5px 0;
 }
@@ -352,16 +357,15 @@ ion-card {
   margin-top: 20px;
   margin-bottom: 40px;
   gap: 12px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 16px;
 }
 
-
 /* Estilos para el botón de "Añadir a favoritos" */
 .favorite-button::part(native) {
-  background-color: #6F4FF2;
+  background-color: #6f4ff2;
   border-radius: 9px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 14px;
   color: white;
   margin-top: 15px;
@@ -376,7 +380,7 @@ ion-card {
 
 /* Estilos para el texto dentro del filtro de precio */
 .dropdown-overlay.price-dropdown ion-label {
-  font-family: 'Poppins', sans-serif; /* Fuente Poppins */
+  font-family: "Poppins", sans-serif; /* Fuente Poppins */
   font-size: 16px; /* Tamaño del texto más grande */
   color: #848484; /* Color del texto */
   margin-top: 10px; /* Espacio entre la barra y el texto */
@@ -384,9 +388,9 @@ ion-card {
 
 /* Estilos para la barra de rango (ion-range) dentro del filtro de precio */
 .dropdown-overlay.price-dropdown ion-range {
-  --bar-background: #00BD90; /* Color de fondo de la barra */
-  --bar-background-active: #00BD90; /* Color de fondo activo de la barra */
-  --knob-background: #00BD90; /* Color del knob (circulo) */
+  --bar-background: #00bd90; /* Color de fondo de la barra */
+  --bar-background-active: #00bd90; /* Color de fondo activo de la barra */
+  --knob-background: #00bd90; /* Color del knob (circulo) */
   --knob-size: 20px; /* Tamaño del knob */
   --bar-height: 6px; /* Altura de la barra */
   --bar-border-radius: 3px; /* Bordes redondeados de la barra */
@@ -402,7 +406,7 @@ ion-card {
 .nutrition-dropdown ion-button.nutrition-button::part(native) {
   background-color: white; /* Fondo blanco */
   color: #848484; /* Texto gris */
-  font-family: 'Poppins', sans-serif; /* Fuente Poppins */
+  font-family: "Poppins", sans-serif; /* Fuente Poppins */
   font-size: 14px; /* Tamaño del texto */
   font-weight: 500; /* Peso de la fuente */
   text-transform: none; /* Sin mayúsculas */
@@ -439,27 +443,38 @@ ion-card {
   flex-shrink: 0;
 }
 
-
 /* Estilo visual del botón */
 .reset-button {
   --background: #f4f4f4;
   --color: #333;
   --border-radius: 22px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 14px;
   font-weight: 500;
   text-transform: none;
 }
 
-
-
-
-
-
 /* Estilos para el texto del precio por unidad */
 .product-card p.precio-por-unidad {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 14px;
   color: #666; /* Color gris para diferenciarlo */
   margin: 5px 0; /* Espaciado */
+}
+
+/* Ajustes para hacer la página de buscar producto responsive */
+.buscar-producto-card {
+  width: 90%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+ion-button {
+  margin-top: 16px;
+  width: 100%;
 }

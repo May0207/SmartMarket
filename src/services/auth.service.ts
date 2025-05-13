@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -7,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
   private apiUrl = 'http://localhost:3000';
   private currentUser: any = null;
+  private authState = new BehaviorSubject<boolean>(this.isLoggedIn());
 
   constructor(private http: HttpClient) {}
 
@@ -38,6 +40,7 @@ export class AuthService {
     if (response && response.user) {
       this.currentUser = response.user;
       localStorage.setItem('user', JSON.stringify(this.currentUser));
+      this.authState.next(true); // Emitir cambio de estado
     }
 
     return response;
@@ -58,6 +61,7 @@ export class AuthService {
   logout() {
     this.currentUser = null;
     localStorage.removeItem('user');
+    this.authState.next(false); // Emitir cambio de estado
   }
 
   getUserRole(): string | null {
@@ -70,5 +74,9 @@ export class AuthService {
   }
   updateUser(id: number, updatedData: any) {
     return this.http.put(`${this.apiUrl}/usuarios/${id}`, updatedData);
+  }
+
+  authStateChanged() {
+    return this.authState.asObservable();
   }
 }

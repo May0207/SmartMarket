@@ -10,7 +10,7 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   templateUrl: './inicio.page.html',
   styleUrls: ['./inicio.page.scss'],
-  imports: [CommonModule, FormsModule, IonicModule]
+  imports: [CommonModule, FormsModule, IonicModule],
 })
 export class InicioPage implements OnInit {
   images = ['assets/bg1.jpg', 'assets/bg2.jpg', 'assets/bg3.jpg'];

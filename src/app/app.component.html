@@ -1,3 +1,4 @@
+<ion-router-outlet> </ion-router-outlet>
 <ng-container *ngIf="mostrarSidebar">
   <aside class="sidebar">
     <div class="sidebar-top">
@@ -5,7 +6,8 @@
         src="assets/lLogo.png"
         alt="Logo"
         class="sidebar-icon logo"
-        (click)="goToHome()"
+        (click)="!isLoggedIn && goToHome()"
+        [class.disabled]="isLoggedIn"
       />
 
       <!-- Solo si el usuario está logueado -->
@@ -56,4 +58,3 @@
   <!-- Chatbot flotante -->
   <app-chatbot *ngIf="mostrarChat"></app-chatbot>
 </ng-container>
-<ion-router-outlet> </ion-router-outlet>

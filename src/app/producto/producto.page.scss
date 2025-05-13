@@ -4,10 +4,10 @@
   height: 100%;
   padding: 0px;
 }
- /* Barra lateral (fija) */
+/* Barra lateral (fija) */
 .sidebar {
   width: 60px;
-  background: #FFFFFF; /* Blanco */
+  background: #ffffff; /* Blanco */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,7 +47,7 @@
 
 /* Logo */
 .sidebar-icon.logo {
-  color: #65646A;
+  color: #65646a;
   font-size: 30px; /* Tamaño personalizado */
   width: 30px; /* Tamaño personalizado */
   height: 30px; /* Tamaño personalizado */
@@ -56,7 +56,7 @@
 /* Favoritos, Perfil y Configuración */
 .sidebar-icon.favoritos {
   margin-top: 50px; /* Mueve los íconos 50px hacia abajo */
-  color: #65646A;
+  color: #65646a;
   font-size: 22px; /* Tamaño personalizado */
   width: 22px; /* Tamaño personalizado */
   height: 22px; /* Tamaño personalizado */
@@ -65,7 +65,7 @@
 .sidebar-icon.profile,
 .sidebar-icon.settings {
   margin-top: 15px; /* Mueve los íconos 50px hacia abajo */
-  color: #65646A;
+  color: #65646a;
   font-size: 22px; /* Tamaño personalizado */
   width: 22px; /* Tamaño personalizado */
   height: 22px; /* Tamaño personalizado */
@@ -73,12 +73,11 @@
 
 /* Cerrar Sesión */
 .sidebar-icon.sign-out {
-  color: #65646A;
+  color: #65646a;
   font-size: 22px; /* Tamaño personalizado */
   width: 22px; /* Tamaño personalizado */
   height: 22px; /* Tamaño personalizado */
 }
-
 
 /* Contenido Principal */
 .content-area {
@@ -113,7 +112,7 @@
 }
 
 .product-name {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 24px;
   font-weight: 600; /* Semibold */
   margin: 10px 0;
@@ -129,15 +128,15 @@
 }
 
 .product-image {
-  width: 250px;  // Ajusta el ancho según lo necesites
-  height: auto;  // Mantiene la proporción original
-  object-fit: contain;  // Evita distorsiones
-  border-radius: 10px;  // Bordes redondeados opcionales
-  margin: 10px 0;  // Espaciado para que no se vea pegada
+  width: 250px; // Ajusta el ancho según lo necesites
+  height: auto; // Mantiene la proporción original
+  object-fit: contain; // Evita distorsiones
+  border-radius: 10px; // Bordes redondeados opcionales
+  margin: 10px 0; // Espaciado para que no se vea pegada
   transition: transform 0.3s ease-in-out;
 
   &:hover {
-    transform: scale(1.05);  // Efecto de aumento al pasar el cursor
+    transform: scale(1.05); // Efecto de aumento al pasar el cursor
   }
 }
 
@@ -155,7 +154,7 @@
 }
 
 .product-details {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 18x;
   font-weight: 600; /* Semibold */
   margin: 10px 0;
@@ -163,16 +162,15 @@
 }
 
 .buy-button::part(native) {
-  background-color: #6F4FF2;
+  background-color: #6f4ff2;
   border-radius: 9px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 14px;
   color: white;
   margin-top: 15px;
   width: 100%;
   box-shadow: none; /* Sin sombra */
 }
-
 
 /* Sección Derecha */
 .right-section {
@@ -210,4 +208,32 @@ h3 {
   color: #5c3b00;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   display: inline-block;
+}
+
+/* Ajustes para hacer la página de producto responsive */
+ion-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.producto-card {
+  width: 90%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+ion-button {
+  margin-top: 16px;
+  width: 100%;
 }

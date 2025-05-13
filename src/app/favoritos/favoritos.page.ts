@@ -37,7 +37,7 @@ export class FavoritosPage {
     const user = this.authService.getCurrentUser();
 
     if (!user) {
-      return; 
+      return;
     }
 
     this.loading = true;

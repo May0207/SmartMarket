@@ -1,10 +1,16 @@
 /* Fuente principal */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
-/* Estilos globales para el contenido */
+/* Ajustes para asegurar que todo el contenido sea visible sin necesidad de hacer zoom */
 ion-content {
-  --background: #f2f2f2;
-  --overflow: hidden; // Oculta el scroll (opcional)
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
 /* Contenedor general que estructura la app en sidebar + contenido */
@@ -28,10 +34,16 @@ ion-content {
 
 /* Tarjeta del formulario */
 .perfil-card {
-  width: 50%;
-  max-width: 600px;
+  width: 90%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
   background-color: white !important;
   color: black !important;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 /* Estilos para cada fila del formulario */
@@ -60,7 +72,8 @@ ion-input {
   font-size: 16px;
   font-weight: 600;
   padding: 12px 24px;
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   display: block;
   margin: 20px auto 0 auto;
   text-align: center;
@@ -101,18 +114,17 @@ ion-input {
 .perfil-wrapper {
   display: flex;
   justify-content: center;
-  padding: 20px;
+  align-items: center;
+  padding: 16px;
   background-color: #f5f6fa;
   min-height: 100vh;
+  box-sizing: border-box;
 }
 
-.perfil-card {
-  width: 100%;
-  max-width: 500px;
-  background: #fff;
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+.perfil-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .perfil-header {
@@ -134,5 +146,6 @@ ion-input {
 }
 
 ion-button {
-  margin-top: 20px;
+  margin-top: 16px;
+  width: 100%;
 }

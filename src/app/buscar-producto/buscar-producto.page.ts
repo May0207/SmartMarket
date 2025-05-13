@@ -34,7 +34,8 @@ interface Producto {
   standalone: true,
   imports: [CommonModule, FormsModule, IonicModule],
 })
-export class BuscarProductoPage{
+export class BuscarProductoPage {
+  isLoggedIn = false;
   products: Producto[] = [];
   favoritosIds: number[] = [];
   loading = false;
@@ -70,7 +71,7 @@ export class BuscarProductoPage{
 
   ionViewWillEnter() {
     this.loadProducts(); // 👈 sigue cargando los productos
-  
+
     const user = this.authService.getCurrentUser();
     if (user) {
       this.favoritesService.getFavorites(user.id_usuario).subscribe({
@@ -82,7 +83,7 @@ export class BuscarProductoPage{
     } else {
       this.favoritosIds = []; // vaciar por si no hay sesión
     }
-  }  
+  }
 
   loadPage(page: number) {
     this.offset = (page - 1) * this.limit;
@@ -144,7 +145,9 @@ export class BuscarProductoPage{
               this.authService.logout();
               this.favoritosIds = [];
               this.isPopoverOpen = false;
-              // Simplemente actualiza la vista, sin redirigir
+              // Redirije por que no actualiza el sidebar
+              this.isPopoverOpen = false;
+              setTimeout(() => this.router.navigate(['/inicio']), 100);
             },
           },
         ],

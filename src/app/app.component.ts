@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { IonicModule, AlertController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -15,6 +17,7 @@ export class AppComponent {
   isPopoverOpen = false;
   popoverEvent: any;
   mostrarChat = false;
+  private authSubscription: Subscription;
 
   constructor(
     private router: Router,
@@ -24,14 +27,32 @@ export class AppComponent {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const rutasSinSidebar = ['/inicio', '/login', '/register'];
-        const currentUrl = this.router.url;
-        this.mostrarSidebar = !rutasSinSidebar.includes(event.url);
+        const currentUrl = event.urlAfterRedirects || event.url;
+        this.mostrarSidebar = !rutasSinSidebar.some((ruta) =>
+          currentUrl.startsWith(ruta)
+        );
 
         // Estado del usuario
         this.isLoggedIn = this.auth.isLoggedIn();
         this.rol = this.auth.getUserRole();
       }
     });
+
+    // Suscribirse a los cambios de autenticación
+    this.authSubscription = this.auth
+      .authStateChanged()
+      .subscribe((isLoggedIn) => {
+        if (!isLoggedIn) {
+          this.router.navigate(['/inicio']);
+        }
+      });
+  }
+
+  ngOnDestroy() {
+    // Cancelar la suscripción para evitar fugas de memoria
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
+    }
   }
 
   goToHome() {

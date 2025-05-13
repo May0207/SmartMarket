@@ -1,10 +1,16 @@
 /* Fuente principal */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
-/* Estilos globales para el contenido */
+/* Ajustes para hacer la página de configuración responsive */
 ion-content {
-  --background: #f2f2f2;
-  --overflow: hidden; // Oculta el scroll (opcional)
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
 /* Contenedor general que estructura la app en sidebar + contenido */
@@ -96,4 +102,21 @@ ion-input {
   margin-left: auto;
   display: flex;
   justify-content: flex-end;
+}
+
+/* Tarjeta de configuración */
+.config-card {
+  width: 90%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+ion-button {
+  margin-top: 16px;
+  width: 100%;
 }
