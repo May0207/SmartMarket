@@ -14,6 +14,7 @@ export class AppComponent {
   rol: string | null = null;
   isPopoverOpen = false;
   popoverEvent: any;
+  mostrarChat = false;
 
   constructor(
     private router: Router,

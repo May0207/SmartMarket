@@ -3,6 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
 const db = require("./db");
+const axios = require("axios");
 
 const app = express();
 const PORT = 3000;
@@ -426,5 +427,72 @@ CAST(REPLACE(n.azucares, ',', '.') AS DECIMAL(10,2)) AS azucares
       error: "Error interno",
       detail: err.message,
     });
+  }
+});
+// RUTA DE CHATBOT
+app.post("/chatbot", async (req, res) => {
+  const pregunta = req.body.mensaje;
+
+  if (!pregunta) {
+    return res.status(400).json({ error: "Mensaje vacío" });
+  }
+
+  try {
+    // 1. GPT interpreta la pregunta
+    const openaiResponse = await axios.post(
+      "https://api.openai.com/v1/chat/completions",
+      {
+        model: "gpt-4o",
+        messages: [
+          {
+            role: "system",
+            content: `
+Eres un asistente de compras de supermercado. Convierte la siguiente pregunta del usuario en un JSON con filtros de búsqueda para una API REST.
+
+Campos disponibles:
+- search: texto a buscar en el nombre del producto
+- precioMax: precio máximo (número)
+- nutritionField: campo nutricional (por ejemplo "azucares", "proteinas", etc.)
+- nutritionOrder: "asc" o "desc" según si quiere menos o más cantidad
+
+Devuelve solo un JSON válido. No incluyas explicaciones ni texto adicional.
+`,
+          },
+          { role: "user", content: pregunta },
+        ],
+        temperature: 0.2,
+        max_tokens: 150,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        },
+      }
+    );
+
+    const filtros = JSON.parse(openaiResponse.data.choices[0].message.content);
+
+    // 2. Adaptar filtros al formato que espera tu API
+    const queryParams = new URLSearchParams();
+
+    if (filtros.search) queryParams.append("search", filtros.search);
+    if (filtros.precioMax) queryParams.append("precioMax", filtros.precioMax);
+    if (filtros.nutritionField && filtros.nutritionOrder) {
+      queryParams.append("nutritionField", filtros.nutritionField);
+      queryParams.append("nutritionOrder", filtros.nutritionOrder);
+    }
+
+    const url = `http://localhost:3000/api/productos?limit=25&offset=0&${queryParams.toString()}`;
+
+    // 3. Llama a tu propia API de productos
+    const productosResponse = await axios.get(url);
+    const productos = productosResponse.data;
+
+    res.json({ filtros, resultados: productos });
+  } catch (err) {
+    console.error("Error en /chatbot:", err.response?.data || err.message);
+    res
+      .status(500)
+      .json({ error: "Error al procesar la consulta del chatbot" });
   }
 });

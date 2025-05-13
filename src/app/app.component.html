@@ -49,6 +49,11 @@
       ></ion-icon>
     </div>
   </aside>
-</ng-container>
 
-<ion-router-outlet></ion-router-outlet>
+  <!-- Botón flotante -->
+  <button class="chat-button" (click)="mostrarChat = !mostrarChat">💬</button>
+
+  <!-- Chatbot flotante -->
+  <app-chatbot *ngIf="mostrarChat"></app-chatbot>
+</ng-container>
+<ion-router-outlet> </ion-router-outlet>

@@ -1,0 +1,20 @@
+<div class="chatbot-container">
+  <div class="chat-messages">
+    <div *ngFor="let msg of mensajes" [ngClass]="msg.de">
+      <strong>{{ msg.de === "user" ? "Tú:" : "Bot:" }}</strong>
+      <p>{{ msg.texto }}</p>
+    </div>
+    <div *ngIf="cargando" class="bot">Cargando...</div>
+  </div>
+
+  <div class="chat-input">
+    <input
+      [(ngModel)]="mensajeUsuario"
+      (keyup.enter)="enviarMensaje()"
+      placeholder="Escribe tu pregunta..."
+    />
+    <button (click)="enviarMensaje()" [disabled]="!mensajeUsuario.trim()">
+      Enviar
+    </button>
+  </div>
+</div>
