@@ -16,13 +16,15 @@ export class ChatbotComponent implements OnInit {
   mensajes: { de: 'user' | 'bot'; texto: string }[] = [];
   cargando = false;
 
+  // ⚠️ Aquí deberías usar el ID real del usuario logueado
+  userId = 1;
+
   constructor(private http: HttpClient) {}
 
-  // 👋 Mensaje de bienvenida del bot al iniciar
   ngOnInit(): void {
     this.mensajes.push({
       de: 'bot',
-      texto: '¡Hola! 👋 Soy tu asistente virtual. ¿En qué puedo ayudarte hoy?'
+      texto: '¡Hola! 👋 Soy tu chef personal. Puedo ayudarte a preparar recetas con lo que tienes en favoritos. ¿Te apetece algo en particular?'
     });
   }
 
@@ -35,26 +37,24 @@ export class ChatbotComponent implements OnInit {
     this.cargando = true;
 
     this.http
-      .post<any>('http://localhost:3000/chatbot', { mensaje })
+      .post<any>('http://localhost:3000/chatbot', {
+        mensaje,
+        userId: this.userId,
+      })
       .subscribe({
         next: (res) => {
-          const productos = res.resultados;
-          if (productos.length === 0) {
-            this.mensajes.push({ de: 'bot', texto: 'No encontré productos.' });
+          if (res.receta) {
+            this.mensajes.push({ de: 'bot', texto: res.receta });
+          } else if (res.mensaje) {
+            this.mensajes.push({ de: 'bot', texto: res.mensaje });
           } else {
-            const listado = productos
-              .slice(0, 5)
-              .map((p: any) => `- ${p.nombre} (${p.precio}€)`)
-              .join('\n');
-            this.mensajes.push({
-              de: 'bot',
-              texto: `Aquí tienes:\n${listado}`,
-            });
+            this.mensajes.push({ de: 'bot', texto: 'No encontré ninguna receta con tus productos.' });
           }
           this.cargando = false;
         },
-        error: () => {
-          this.mensajes.push({ de: 'bot', texto: 'Ocurrió un error.' });
+        error: (err) => {
+          console.error(err);
+          this.mensajes.push({ de: 'bot', texto: 'Ocurrió un error al generar la receta.' });
           this.cargando = false;
         },
       });

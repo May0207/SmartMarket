@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
 const db = require("./db");
 const axios = require("axios");
-
+require("dotenv").config(); 
 const app = express();
 const PORT = 3000;
 
@@ -432,13 +432,95 @@ CAST(REPLACE(n.azucares, ',', '.') AS DECIMAL(10,2)) AS azucares
 // RUTA DE CHATBOT
 app.post("/chatbot", async (req, res) => {
   const pregunta = req.body.mensaje;
+  const userId = req.body.userId;
 
-  if (!pregunta) {
-    return res.status(400).json({ error: "Mensaje vacío" });
+  if (!pregunta || !userId) {
+    return res.status(400).json({ error: "Mensaje o usuario no proporcionado" });
   }
 
   try {
-    // 1. GPT interpreta la pregunta
+    // Obtener favoritos del usuario con valores nutricionales
+    const [favoritos] = await db.query(
+      `
+      SELECT 
+        p.nombre,
+        p.categoria,
+        p.subcategoria,
+        n.proteinas,
+        n.grasas,
+        n.hidratos_carbono,
+        n.azucares,
+        CAST(TRIM(SUBSTRING_INDEX(n.valor_energetico, '/', 1)) AS UNSIGNED) AS calorias
+      FROM favoritos f
+      JOIN producto p ON f.id_producto = p.id_producto
+      LEFT JOIN nutricion n ON n.id_producto = p.id_producto
+      WHERE f.id_usuario = ?
+      `,
+      [userId]
+    );
+
+    if (favoritos.length === 0) {
+      return res.json({ resultados: [], mensaje: "No tienes productos en favoritos aún." });
+    }
+
+    // Si tiene muchos favoritos, obligar a que mencione algunos
+    const UMBRAL = 10;
+    const productoNombres = favoritos.map(f => f.nombre.toLowerCase());
+
+    let productosFiltrados = favoritos;
+
+    if (favoritos.length > UMBRAL) {
+      // Pedimos a GPT que nos diga si ha mencionado productos
+      const extractResponse = await axios.post(
+        "https://api.openai.com/v1/chat/completions",
+        {
+          model: "gpt-4o",
+          messages: [
+            {
+              role: "system",
+              content: `Extrae solo los nombres de productos/ingredientes mencionados por el usuario (en minúsculas). Devuelve un JSON así: {"productos": ["atún", "arroz"]}. Si no hay ninguno, devuelve {"productos": []}.`
+            },
+            {
+              role: "user",
+              content: pregunta
+            }
+          ],
+          temperature: 0,
+          max_tokens: 100
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+          },
+        }
+      );
+
+      const extraidos = JSON.parse(extractResponse.data.choices[0].message.content);
+      const mencionados = extraidos.productos || [];
+
+      if (mencionados.length === 0) {
+        return res.json({
+          resultados: [],
+          mensaje: `Tienes muchos productos guardados. Por favor, indica con qué productos de tus favoritos quieres que haga la receta.`
+        });
+      }
+
+      // Filtrar favoritos para que coincidan con los mencionados
+      productosFiltrados = favoritos.filter(f =>
+        mencionados.some(m => f.nombre.toLowerCase().includes(m))
+      );
+
+      if (productosFiltrados.length === 0) {
+        return res.json({ resultados: [], mensaje: "Los productos que mencionaste no están en tus favoritos." });
+      }
+    }
+
+    // Formatear productos con su información nutricional
+    const listaFormateada = productosFiltrados.map(f => {
+      return `${f.nombre} (Calorías: ${f.calorias || 0} kcal, Proteínas: ${f.proteinas || 0}g, Grasas: ${f.grasas || 0}g, Carbohidratos: ${f.hidratos_carbono || 0}g, Azúcares: ${f.azucares || 0}g)`;
+    }).join('\n');
+
+    // Generar la receta final
     const openaiResponse = await axios.post(
       "https://api.openai.com/v1/chat/completions",
       {
@@ -447,21 +529,28 @@ app.post("/chatbot", async (req, res) => {
           {
             role: "system",
             content: `
-Eres un asistente de compras de supermercado. Convierte la siguiente pregunta del usuario en un JSON con filtros de búsqueda para una API REST.
+Eres un chef nutricionista. Crea una receta usando solo los productos proporcionados. Si el usuario menciona una dieta (ej: keto, vegana, sin gluten), adáptala. Siempre añade una estimación nutricional final.
 
-Campos disponibles:
-- search: texto a buscar en el nombre del producto
-- precioMax: precio máximo (número)
-- nutritionField: campo nutricional (por ejemplo "azucares", "proteinas", etc.)
-- nutritionOrder: "asc" o "desc" según si quiere menos o más cantidad
-
-Devuelve solo un JSON válido. No incluyas explicaciones ni texto adicional.
-`,
+Formato:
+---
+Receta: ...  
+Ingredientes: ...  
+Preparación: ...  
+Valores nutricionales:  
+- Calorías: ...  
+- Proteínas: ...  
+- Grasas: ...  
+- Carbohidratos: ...
+---
+            `
           },
-          { role: "user", content: pregunta },
+          {
+            role: "user",
+            content: `Estos son mis productos disponibles:\n${listaFormateada}\nMi mensaje: ${pregunta}`
+          }
         ],
-        temperature: 0.2,
-        max_tokens: 150,
+        temperature: 0.5,
+        max_tokens: 700
       },
       {
         headers: {
@@ -470,29 +559,11 @@ Devuelve solo un JSON válido. No incluyas explicaciones ni texto adicional.
       }
     );
 
-    const filtros = JSON.parse(openaiResponse.data.choices[0].message.content);
+    const receta = openaiResponse.data.choices[0].message.content;
+    res.json({ resultados: [], receta });
 
-    // 2. Adaptar filtros al formato que espera tu API
-    const queryParams = new URLSearchParams();
-
-    if (filtros.search) queryParams.append("search", filtros.search);
-    if (filtros.precioMax) queryParams.append("precioMax", filtros.precioMax);
-    if (filtros.nutritionField && filtros.nutritionOrder) {
-      queryParams.append("nutritionField", filtros.nutritionField);
-      queryParams.append("nutritionOrder", filtros.nutritionOrder);
-    }
-
-    const url = `http://localhost:3000/api/productos?limit=25&offset=0&${queryParams.toString()}`;
-
-    // 3. Llama a tu propia API de productos
-    const productosResponse = await axios.get(url);
-    const productos = productosResponse.data;
-
-    res.json({ filtros, resultados: productos });
   } catch (err) {
     console.error("Error en /chatbot:", err.response?.data || err.message);
-    res
-      .status(500)
-      .json({ error: "Error al procesar la consulta del chatbot" });
+    res.status(500).json({ error: "Error al generar receta" });
   }
 });
