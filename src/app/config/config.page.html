@@ -1,40 +1,40 @@
-<ion-content>
-  <!-- Contenedor principal con layout de dos columnas -->
-  <div class="main-container">
-    <!-- Área de contenido principal -->
-    <div class="content-area">
-      <!-- Tarjeta de perfil de usuario -->
-      <ion-card class="perfil-card">
-        <ion-card-header>
-          <ion-card-title>Gestión de usuarios</ion-card-title>
-        </ion-card-header>
+  <ion-content>
+    <!-- Contenedor principal con layout de dos columnas -->
+    <div class="main-container">
+      <!-- Área de contenido principal -->
+      <div class="content-area">
+        <!-- Tarjeta de perfil de usuario -->
+        <ion-card class="perfil-card">
+          <ion-card-header>
+            <ion-card-title>Gestión de usuarios</ion-card-title>
+          </ion-card-header>
 
-        <ion-card-content>
-          <ion-list>
-            <ion-item *ngFor="let user of usuarios">
-              <ion-label>
-                <h2>{{ user.nombre }} {{ user.apellido1 }}</h2>
-                <p>Email: {{ user.email }}</p>
-                <p>Rol: {{ user.rol }}</p>
-              </ion-label>
+          <ion-card-content>
+            <ion-list>
+              <ion-item *ngFor="let user of usuarios">
+                <ion-label>
+                  <h2>{{ user.nombre }} {{ user.apellido1 }}</h2>
+                  <p>Email: {{ user.email }}</p>
+                  <p>Rol: {{ user.rol }}</p>
+                </ion-label>
 
-              <!-- Cambiar rol -->
-              <ion-button size="small" (click)="cambiarRol(user)">
-                {{ user.rol === 'admin' ? 'Hacer cliente' : 'Hacer admin' }}
-              </ion-button>
+                <!-- Cambiar rol -->
+                <ion-button size="small" (click)="cambiarRol(user)">
+                  {{ user.rol === 'admin' ? 'Hacer cliente' : 'Hacer admin' }}
+                </ion-button>
 
-              <!-- Eliminar -->
-              <ion-button
-                color="danger"
-                size="small"
-                (click)="eliminarUsuario(user)"
-              >
-                Eliminar
-              </ion-button>
-            </ion-item>
-          </ion-list>
-        </ion-card-content>
-      </ion-card>
+                <!-- Eliminar -->
+                <ion-button
+                  color="danger"
+                  size="small"
+                  (click)="eliminarUsuario(user)"
+                >
+                  Eliminar
+                </ion-button>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </div>
     </div>
-  </div>
-</ion-content>
+  </ion-content>

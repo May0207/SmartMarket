@@ -2,8 +2,8 @@
   position: fixed;
   bottom: 80px;
   right: 20px;
-  width: 300px;
-  max-height: 400px;
+  width: 320px;
+  height: 460px;
   background: white;
   border: 1px solid #ccc;
   border-radius: 1rem;
@@ -12,36 +12,84 @@
   flex-direction: column;
   overflow: hidden;
   z-index: 9999;
+  font-family: Arial, sans-serif;
+}
+
+.chatbot-header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: #4a90e2;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+
+  img {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+  }
 }
 
 .chat-messages {
   flex: 1;
   padding: 10px;
   overflow-y: auto;
+  background-color: #f4f4f4;
 }
 
 .user {
   text-align: right;
-  color: black;
+
+  p {
+    background-color: #d1eaff;
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 12px;
+    margin: 4px 0;
+    max-width: 80%;
+  }
 }
 
 .bot {
   text-align: left;
-  color: darkblue;
+
+  p {
+    background-color: #e6e6e6;
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 12px;
+    margin: 4px 0;
+    max-width: 80%;
+  }
 }
 
 .chat-input {
   display: flex;
   border-top: 1px solid #ccc;
-  padding: 5px;
+  padding: 8px;
+  background-color: white;
 
   input {
     flex: 1;
-    border: none;
-    padding: 5px;
+    border: 1px solid #ccc;
+    padding: 6px;
+    border-radius: 8px;
+    outline: none;
   }
 
   button {
-    margin-left: 5px;
+    margin-left: 8px;
+    padding: 6px 12px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &:disabled {
+      background-color: #999;
+      cursor: not-allowed;
+    }
   }
 }

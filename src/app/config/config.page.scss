@@ -1,122 +1,64 @@
-/* Fuente principal */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
-
-/* Ajustes para hacer la página de configuración responsive */
 ion-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  min-height: 100vh;
-  box-sizing: border-box;
-  overflow-y: auto;
+  --background: #f9f9f9;
+  padding-top: 24px;
 }
 
-/* Contenedor general que estructura la app en sidebar + contenido */
 .main-container {
   display: flex;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
 }
-
-/* ---------------------- */
-/* ---- ÁREA CENTRAL ---- */
-/* ---------------------- */
 
 .content-area {
   flex-grow: 1;
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-left: 60px; // evita que el contenido quede debajo del sidebar
+  align-items: flex-start;
+  margin-left: 60px;
+  padding: 20px;
 }
 
-/* Tarjeta del formulario */
 .perfil-card {
-  width: 50%;
-  max-width: 600px;
-  background-color: white !important;
-  color: black !important;
-}
-
-/* Estilos para cada fila del formulario */
-ion-item {
-  --background: #ffffff !important;
-  --ion-item-background: #ffffff !important;
-  background-color: #ffffff !important;
-  color: #000000 !important;
-}
-
-/* Texto de inputs y labels */
-ion-label,
-ion-input {
-  color: #000000 !important;
-}
-
-/* ------------------ */
-/* ---- BOTÓN ------- */
-/* ------------------ */
-
-.modificar-button {
-  --background: #6f4ff2; // Morado principal
-  --background-activated: #5c3de0; // Al presionar
-  --border-radius: 12px;
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  padding: 12px 24px;
-  width: 400px;
-  display: block;
-  margin: 20px auto 0 auto;
-  text-align: center;
-  box-shadow: none;
-}
-
-/* ------------------------------- */
-/* - OPCIONAL: Botón de filtros -- */
-/* ------------------------------- */
-
-.filter-container ion-button {
-  --border-radius: 22px;
-  --background: #00bd90;
-  --padding-start: 20px;
-  --padding-end: 20px;
-  --box-shadow: none;
-  font-family: "Poppins", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  text-transform: none;
-  color: white;
-}
-
-/* Botón aplicar (si se usa en otro lugar) */
-.apply-button {
-  --border-radius: 22px;
-  font-family: "Poppins", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  text-transform: none;
-  margin-top: 10px;
-  width: auto;
-  margin-left: auto;
-  display: flex;
-  justify-content: flex-end;
-}
-
-/* Tarjeta de configuración */
-.config-card {
-  width: 90%;
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 16px;
-  box-sizing: border-box;
-  background: #fff;
+  width: 100%;
+  max-width: 800px;
+  background-color: #ffffff;
   border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.usuarios-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.usuario-card {
+  padding: 16px;
+  border-radius: 12px;
+  background-color: #fafafa;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.usuario-info {
+  margin-bottom: 12px;
+}
+
+.usuario-info h3 {
+  margin: 0 0 4px 0;
+  font-size: 1.1rem;
+}
+
+.usuario-botones {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 ion-button {
-  margin-top: 16px;
-  width: 100%;
+  --border-radius: 12px;
+  --box-shadow: none;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  text-transform: none;
+  padding: 8px 20px;
 }

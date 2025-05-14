@@ -286,11 +286,11 @@
       </ion-grid>
 
       <div class="pagination-controls" *ngIf="!loading && !error">
-        <ion-button (click)="previousPage()" [disabled]="currentPage === 1"
+        <ion-button  class="pagination-button"(click)="previousPage()" [disabled]="currentPage === 1"
           >Anterior</ion-button
         >
         <span>Página {{ currentPage }}</span>
-        <ion-button (click)="nextPage()">Siguiente</ion-button>
+        <ion-button class="pagination-button" (click)="nextPage()">Siguiente</ion-button>
       </div>
     </div>
   </div>

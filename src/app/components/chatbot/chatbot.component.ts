@@ -1,5 +1,5 @@
 // src/app/components/chatbot/chatbot.component.ts
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -11,12 +11,20 @@ import { CommonModule } from '@angular/common';
   templateUrl: './chatbot.component.html',
   styleUrls: ['./chatbot.component.scss'],
 })
-export class ChatbotComponent {
+export class ChatbotComponent implements OnInit {
   mensajeUsuario = '';
   mensajes: { de: 'user' | 'bot'; texto: string }[] = [];
   cargando = false;
 
   constructor(private http: HttpClient) {}
+
+  // 👋 Mensaje de bienvenida del bot al iniciar
+  ngOnInit(): void {
+    this.mensajes.push({
+      de: 'bot',
+      texto: '¡Hola! 👋 Soy tu asistente virtual. ¿En qué puedo ayudarte hoy?'
+    });
+  }
 
   enviarMensaje() {
     const mensaje = this.mensajeUsuario.trim();

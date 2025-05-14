@@ -1,4 +1,11 @@
 <div class="chatbot-container">
+  <!-- Barra superior del chatbot -->
+  <div class="chatbot-header">
+    <img src="assets/robot-icon.png" alt="Robot" />
+    <span>Chatbot</span>
+  </div>
+
+  <!-- Área de mensajes -->
   <div class="chat-messages">
     <div *ngFor="let msg of mensajes" [ngClass]="msg.de">
       <strong>{{ msg.de === "user" ? "Tú:" : "Bot:" }}</strong>
@@ -7,6 +14,7 @@
     <div *ngIf="cargando" class="bot">Cargando...</div>
   </div>
 
+  <!-- Entrada del usuario -->
   <div class="chat-input">
     <input
       [(ngModel)]="mensajeUsuario"
