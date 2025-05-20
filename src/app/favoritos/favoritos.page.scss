@@ -251,6 +251,29 @@ ion-content {
   box-shadow: none; /* Sin sombra */
 }
 
+//icono de perfil
+.profile-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  object-fit: cover;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.custom-popover {
+  --min-width: 200px;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
 ion-card-content {
   flex-grow: 1; // Hace que el contenido se expanda
   display: flex;

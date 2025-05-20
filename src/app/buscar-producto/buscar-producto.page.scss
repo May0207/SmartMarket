@@ -127,6 +127,10 @@ ion-content {
   box-shadow: none; /* Sin sombra */
 }
 
+.auth-buttons ion-button {
+  white-space: nowrap;
+}
+
 /* Avatar del usuario */
 .profile-image {
   width: 40px;

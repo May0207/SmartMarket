@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { FavoritesService } from '../../services/favorites.service';
 import { AuthService } from '../../services/auth.service';
@@ -19,6 +19,7 @@ export class FavoritosPage {
   searchTerm: string = '';
   productosFiltrados: any[] = [];
   productosFavoritos: any[] = [];
+  favoritosIds: number[] = [];
 
   loading: boolean = true;
 
@@ -27,8 +28,9 @@ export class FavoritosPage {
 
   constructor(
     private favoritesService: FavoritesService,
-    private authService: AuthService,
+    public authService: AuthService,
     private router: Router,
+    private alertCtrl: AlertController,
     private toastController: ToastController,
     private loadingController: LoadingController
   ) {}
@@ -74,6 +76,51 @@ export class FavoritosPage {
       color: 'danger', // O 'success', según el tipo de mensaje
     });
     toast.present();
+  }
+
+  presentPopover(ev: any) {
+    this.popoverEvent = ev;
+    this.isPopoverOpen = true;
+  }
+
+  goToLogin() {
+    this.isPopoverOpen = false;
+    setTimeout(() => this.router.navigate(['/login']), 100);
+  }
+
+  goToRegister() {
+    this.isPopoverOpen = false;
+    setTimeout(() => this.router.navigate(['/register']), 100);
+  }
+
+  confirmLogout() {
+    this.alertCtrl
+      .create({
+        header: 'Cerrar sesión',
+        message: '¿Estás seguro de que quieres cerrar sesión?',
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+          },
+          {
+            text: 'Cerrar sesión',
+            handler: () => {
+              this.authService.logout();
+              this.favoritosIds = [];
+              this.isPopoverOpen = false;
+              // Redirije por que no actualiza el sidebar
+              this.isPopoverOpen = false;
+              setTimeout(() => this.router.navigate(['/inicio']), 100);
+            },
+          },
+        ],
+      })
+      .then((alert) => alert.present());
+  }
+
+  logout() {
+    this.confirmLogout();
   }
 
   toggleFavorito(producto: any) {
