@@ -550,7 +550,8 @@ Valores nutricionales aproximados:
 - Carbohidratos: ... g  
 ---
 
-Si son dos recetas, repite el mismo formato para cada una. No añadas notas al final.
+Si son dos recetas, repite el mismo formato para cada una. No añadas notas al final. Y si falta algun valor nutricional inventate la cifra de manera precisa.
+
             `
           },
           {

@@ -19,49 +19,57 @@
   display: flex;
   align-items: center;
   padding: 10px;
-  background: #4a90e2;
+  background: #1e6ed8;
   color: white;
   font-weight: bold;
   font-size: 16px;
+}
 
-  img {
-    width: 24px;
-    height: 24px;
-    margin-right: 8px;
-  }
+.chatbot-header img {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
 }
 
 .chat-messages {
   flex: 1;
   padding: 10px;
   overflow-y: auto;
-  background-color: #f4f4f4;
+  background-color: #f9f9f9;
+}
+
+.chat-messages p {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  margin: 4px 0;
+  line-height: 1.4;
+  font-size: 14px;
 }
 
 .user {
   text-align: right;
+}
 
-  p {
-    background-color: #d1eaff;
-    display: inline-block;
-    padding: 6px 10px;
-    border-radius: 12px;
-    margin: 4px 0;
-    max-width: 80%;
-  }
+.user p {
+  background-color: #d1eaff;
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 12px;
+  margin: 4px 0;
+  max-width: 85%;
 }
 
 .bot {
   text-align: left;
+}
 
-  p {
-    background-color: #e6e6e6;
-    display: inline-block;
-    padding: 6px 10px;
-    border-radius: 12px;
-    margin: 4px 0;
-    max-width: 80%;
-  }
+.bot p {
+  background-color: #e6e6e6;
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 12px;
+  margin: 4px 0;
+  max-width: 85%;
 }
 
 .chat-input {
@@ -69,27 +77,27 @@
   border-top: 1px solid #ccc;
   padding: 8px;
   background-color: white;
+}
 
-  input {
-    flex: 1;
-    border: 1px solid #ccc;
-    padding: 6px;
-    border-radius: 8px;
-    outline: none;
-  }
+.chat-input input {
+  flex: 1;
+  border: 1px solid #ccc;
+  padding: 6px;
+  border-radius: 8px;
+  outline: none;
+}
 
-  button {
-    margin-left: 8px;
-    padding: 6px 12px;
-    background-color: #4a90e2;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
+.chat-input button {
+  margin-left: 8px;
+  padding: 6px 12px;
+  background-color: #1e6ed8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
 
-    &:disabled {
-      background-color: #999;
-      cursor: not-allowed;
-    }
-  }
+.chat-input button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
 }
